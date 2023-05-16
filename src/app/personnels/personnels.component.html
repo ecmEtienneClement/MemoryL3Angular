@@ -1,0 +1,55 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th>Nom</th>
+      <th>Prenon</th>
+      <th>Age</th>
+      <th>Sexe</th>
+      <th>Profil</th>
+      <th>Telephone</th>
+      <th>
+        <a
+          class="nav-link active"
+          aria-current="page"
+          routerLink="{{ routesName.mPersonnel.personnelsAdd }}"
+          routerLinkActive="router-link-active"
+          >Add</a
+        >
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr class="tr" *ngFor="let personnel of personnels | async">
+      <td>
+        {{ personnel.nom }}
+      </td>
+      <td>{{ personnel.prenom }}</td>
+      <td>{{ personnel.age }}</td>
+      <td>{{ personnel.sexe }}</td>
+      <td>{{ personnel.Poste ? personnel.Poste.poste : "" }}</td>
+      <td>{{ personnel.telephone }}</td>
+
+      <td class="tdBtn">
+        <button
+          routerLink="{{ routesName.mPersonnel.personnelsDetails }}/{{
+            personnel.id
+          }}"
+          type="button"
+          class="btn btn-sm btn-outline-info"
+        >
+          info
+        </button>
+      </td>
+      <td class="tdBtn">
+        <button
+          (click)="deletePersonnel(personnel)"
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+        >
+          del
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

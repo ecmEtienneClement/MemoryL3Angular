@@ -1,0 +1,13 @@
+.tr {
+  background-color: white;
+  border: solid 5px white;
+}
+.tr:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 3px black;
+  background-color: wheat;
+  border-radius: 4px;
+}
+.tdBtn {
+  z-index: 5;
+}

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="card" *ngIf="personnel$ | async as per">
+    <h5 class="card-header">{{ per.nom }}</h5>
+    <div class="card-body">
+      <h5 class="card-title">Nom</h5>
+      <p class="card-text">
+        {{ per.nom }}
+      </p>
+      <h5 class="card-title">Prenom</h5>
+      <p class="card-text">
+        {{ per.prenom }}
+      </p>
+      <h5 class="card-title">Adresse</h5>
+      <p class="card-text">
+        {{ per.adresse }}
+      </p>
+      <h5 class="card-title">Age</h5>
+      <p class="card-text">
+        {{ per.age }}
+      </p>
+      <h5 *ngIf="per.Poste " class="card-title">Profil</h5>
+      <p class="card-text">
+        {{ per.Poste ? per.Poste.poste : "" }}
+      </p>
+      <h5 class="card-title">Spécialisation</h5>
+      <p class="card-text">
+        {{ per.specialisation }}
+      </p>
+      <h5 class="card-title">Salaire</h5>
+      <p class="card-text">
+        {{ per.salaire }}
+      </p>
+      <h5 class="card-title">Sexe</h5>
+      <p class="card-text">
+        {{ per.sexe }}
+      </p>
+      <h5 class="card-title">Telephone</h5>
+      <p class="card-text">
+        {{ per.telephone }}
+      </p>
+      <h5 class="card-title">Jour(s) de travail</h5>
+      <p *ngFor="let jour of per.jour" class="card-text">
+        {{ jour }}
+      </p>
+
+      <a
+        routerLink="/{{ routesName.mPersonnel.personnels }}/{{
+          routesName.mPersonnel.personnelsUpd
+        }}/{{ per.id }}"
+        routerLinkActive="router-link-active"
+        class="btn btn-primary"
+        >Modifier</a
+      >
+      <a
+        routerLink="/{{ routesName.mPersonnel.personnels }}"
+        routerLinkActive="router-link-active"
+        class="btn btn-primary"
+        >Retour</a
+      >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,266 @@
+<div class="container">
+  <h1>CONFIG</h1>
+
+  <!--                             INFO CLINIQUE                            -->
+
+  <div class="jumbotron">
+    <div class="container">
+      <form
+        [formGroup]="formInfoClini"
+        (ngSubmit)="submitForm()"
+        novalidate
+        class="form-inline"
+        role="form"
+      >
+        <h4>Information du clinique</h4>
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            NOM                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom clinique</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Al Maktoum"
+                formControlName="nom"
+              />
+            </mat-form-field>
+          </div>
+          <!--                            PROPRIETAIRE                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Propriétaire clinique</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Fallou"
+                formControlName="proprietaire"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            TELEPHONE                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="77 777 77 77"
+                formControlName="telephone"
+              />
+            </mat-form-field>
+          </div>
+          <!--                            EMAIL                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="emd@gmail.com"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            ADDRESS                           -->
+
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Dakar"
+                formControlName="adresse"
+              />
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="!formInfoClini.invalid" class="col form-group">
+            <button type="submit" class="btn btn-outline-info">Modifier</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!--                             TYPE DE PROFIL                            -->
+  <mat-accordion>
+    <mat-expansion-panel
+      class="mt-2"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Ajouter un type de profil </mat-panel-title>
+        <mat-panel-description> Nouveau type de profil </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Nom profil</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Medecin"
+              [(ngModel)]="nameProfil"
+            />
+          </mat-form-field>
+        </div>
+        <div *ngIf="nameProfil != ''" class="col form-group">
+          <button
+            (click)="saveProfil()"
+            type="button"
+            class="btn btn-sm btn-outline-default"
+          >
+            Ajouter
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!--                             SALLES                            -->
+  <mat-accordion>
+    <mat-expansion-panel
+      class="mt-2"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Ajouter Salles </mat-panel-title>
+        <mat-panel-description> Nouveau salle </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col form-group">
+          <mat-form-field
+            appearance="outline"
+            *ngIf="typeDeSalle$ | async as types"
+          >
+            <mat-label>Type de salle</mat-label>
+            <mat-select [(ngModel)]="typeSalleId">
+              <mat-option *ngFor="let type of types" [value]="type.id">{{
+                type.type
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Numéro salle</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="15"
+              [(ngModel)]="numSalle"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>nombre de place</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="3"
+              [(ngModel)]="nbrPlaceSalle"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col form-group">
+          <button
+            *ngIf="typeSalleId != '' && numSalle != 0 && nbrPlaceSalle != 0"
+            (click)="saveSalle()"
+            type="button"
+            class="btn btn-sm btn-outline-default"
+          >
+            Ajouter
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!--                             TYPE DE SALLES                            -->
+  <mat-accordion>
+    <mat-expansion-panel
+      class="mt-2"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Ajouter Type de salles </mat-panel-title>
+        <mat-panel-description> Nouveau types de salle </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Type de salle</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="opération"
+              [(ngModel)]="nameTypeDeSalle"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col form-group" *ngIf="nameTypeDeSalle != ''">
+          <button
+            (click)="saveTypeSalle()"
+            type="button"
+            class="btn btn-sm btn-outline-default"
+          >
+            Ajouter
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!--                             TYPE DE RV                            -->
+  <mat-accordion>
+    <mat-expansion-panel
+      class="mt-2"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Ajouter type de rendez-vous </mat-panel-title>
+        <mat-panel-description>
+          Nouveau types de rendez-vous
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Type de rendez-vous</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="consultation"
+              [(ngModel)]="nameTypeRV"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Prix du rendez-vous</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="2000"
+              [(ngModel)]="prixTypeRV"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col form-group" *ngIf="nameTypeRV != '' && prixTypeRV != 0">
+          <button
+            (click)="saveTypeRV()"
+            type="button"
+            class="btn btn-sm btn-outline-default"
+          >
+            Ajouter
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

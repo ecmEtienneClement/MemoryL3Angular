@@ -1,0 +1,53 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th>Nom</th>
+      <th>Prenon</th>
+      <th>Age</th>
+      <th>Sexe</th>
+      <th>Telephone</th>
+      <th>
+        <a
+          class="nav-link active"
+          aria-current="page"
+          routerLink="{{ routesName.mPatient.patientsAdd }}"
+          routerLinkActive="router-link-active"
+          >Add</a
+        >
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr class="tr" *ngFor="let patient of patients | async">
+      <td>
+        {{ patient.nom }}
+      </td>
+      <td>{{ patient.prenom }}</td>
+      <td>{{ patient.age }}</td>
+      <td>{{ patient.sexe }}</td>
+      <td>{{ patient.telephone }}</td>
+
+      <td class="tdBtn">
+        <button
+          routerLink="{{ routesName.mPatient.patientsDetails }}/{{
+            patient.id
+          }}"
+          type="button"
+          class="btn btn-sm btn-outline-info"
+        >
+          info
+        </button>
+      </td>
+      <td class="tdBtn">
+        <button
+          (click)="deletePatient(patient)"
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+        >
+          del
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
