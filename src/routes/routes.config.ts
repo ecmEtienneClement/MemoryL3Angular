@@ -12,6 +12,7 @@ export class RoutesNames {
   public static mPatient = {
     patients: 'patients',
     patientsAdd: 'patientsAdd',
+    patientsUpd: 'patientsUpd',
     patientsDetails: 'patientsDetails',
   };
 

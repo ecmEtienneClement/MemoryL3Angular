@@ -9,12 +9,14 @@ import { PatientsEffects, PatientsReducer } from './ngrx/Patients.ngrx';
 import { PatientsAddComponent } from './patients-add/patients-add.component';
 import { PatientsDetailsComponent } from './patients-details/patients-details.component';
 import { AngularMateriels } from '../sharedModules/materials.modules';
+import { PatientsUpdComponent } from './patients-upd/patients-upd.component';
 
 @NgModule({
   declarations: [
     PatientsComponent,
     PatientsAddComponent,
     PatientsDetailsComponent,
+    PatientsUpdComponent,
   ],
   imports: [
     CommonModule,

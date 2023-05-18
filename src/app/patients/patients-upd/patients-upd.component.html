@@ -1,0 +1,135 @@
+<div class="container">
+  <h1>PATIENT UPD</h1>
+
+  <form
+    [formGroup]="formPatient"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <!--                            ROW                           -->
+    <div class="row g-3">
+      <!--                            NOM                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="DIOUF"
+            formControlName="nom"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            PRENOM                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Prénom</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Malick"
+            formControlName="prenom"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <!--                            ROW                           -->
+    <div class="row g-3">
+      <!--                            ADRESS                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Adress</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Dakar/Keur Massar/U15"
+            formControlName="adresse"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            AGE                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="25"
+            formControlName="age"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <!--                            ROW                           -->
+    <div class="row g-3">
+      <!--                            SEXE                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Sexe</mat-label>
+          <mat-select formControlName="sexe">
+            <mat-option value="M">Homme</mat-option>
+            <mat-option value="F">Femme</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--                            TELEPHONE                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Téléphone</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="77 777 77 77"
+            formControlName="telephone"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <!--                            ROW                           -->
+    <div class="row g-3">
+      <!--                            DATE DE NAISSANCE                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Date de naissance</mat-label>
+          <input
+            type="datetime"
+            matInput
+            placeholder="17/05/90"
+            formControlName="dateDeNaissance"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            Groupe sanguin                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Groupe sanguin</mat-label>
+          <mat-select formControlName="groupeSanguin">
+            <mat-option *ngFor="let grp of grpSanguin" [value]="grp">{{
+              grp
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <!--                            PROFFESSION                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Proffession</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Maçon"
+            formControlName="proffession"
+          />
+        </mat-form-field>
+      </div>
+      <div *ngIf="!formPatient.invalid" class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>
