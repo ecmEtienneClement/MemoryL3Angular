@@ -89,15 +89,18 @@ export class ConfigCliniqueAddComponent implements OnInit {
         if (infoClini) {
           if (infoClini.length > 0) {
             this.addInfoClini = false;
+            // apres rectification 
+            
+            this.infoClini = infoClini[0];
+            this.formInfoClini.patchValue({
+              nom: infoClini[0].nom,
+              adresse: infoClini[0].adresse,
+              telephone: infoClini[0].telephone,
+              proprietaire: infoClini[0].proprietaire,
+              email: infoClini[0].email,
+            });
           }
-          this.infoClini = infoClini[0];
-          this.formInfoClini.patchValue({
-            nom: infoClini[0].nom,
-            adresse: infoClini[0].adresse,
-            telephone: infoClini[0].telephone,
-            proprietaire: infoClini[0].proprietaire,
-            email: infoClini[0].email,
-          });
+         
         }
       },
       error: (error) => {
