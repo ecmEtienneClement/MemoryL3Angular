@@ -1,3 +1,14 @@
+<!--                            PARTI LOADING             -->
+
+<ng-container *ngIf="stateApp$ | async as stateApp">
+  <app-loading-cmp
+    [dataState]="stateApp"
+    [notification]="notification"
+    [errorMessage]="errorMessage"
+  ></app-loading-cmp>
+</ng-container>
+
+<!--                                   /                            -->
 <table class="table">
   <thead class="table-dark">
     <tr>
@@ -20,7 +31,7 @@
   </thead>
 
   <tbody>
-    <tr class="tr" *ngFor="let personnel of personnels | async">
+    <tr class="tr" *ngFor="let personnel of personnels$ | async">
       <td>
         {{ personnel.nom }}
       </td>

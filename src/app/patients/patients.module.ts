@@ -10,6 +10,7 @@ import { PatientsAddComponent } from './patients-add/patients-add.component';
 import { PatientsDetailsComponent } from './patients-details/patients-details.component';
 import { AngularMateriels } from '../sharedModules/materials.modules';
 import { PatientsUpdComponent } from './patients-upd/patients-upd.component';
+import { ComponentsModule } from '../sharedModules/componentsModule';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PatientsUpdComponent } from './patients-upd/patients-upd.component';
     PatientsRoutingModule,
     StoreModule.forFeature(NameModels.patient, PatientsReducer.getReducer),
     EffectsModule.forFeature([PatientsEffects]),
+    ComponentsModule,
   ],
 })
 export class PatientsModule {}

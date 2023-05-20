@@ -8,7 +8,7 @@ import {
   TypeDeSalle,
   TypeRendezVous,
 } from 'src/models/Models';
-import { AppState } from 'src/ngrx/Entities.state';
+import { AppState, StateApp } from 'src/ngrx/Entities.state';
 import { RoutesNames } from 'src/routes/routes.config';
 import {
   InfoCliniquesActions,
@@ -38,7 +38,9 @@ export class ConfiCliniqueComponent implements OnInit {
   infoClini$: Observable<InfoClinique[]> = new Observable();
   panelOpenState = false;
   readonly routesName = RoutesNames;
-
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+  notification: string[] = [];
+  errorMessage: string[] = [];
   constructor(
     private store: Store<AppState>,
     private posteAtions: PostesActions,
@@ -69,6 +71,17 @@ export class ConfiCliniqueComponent implements OnInit {
     this.infoClini$ = this.store.select(
       this.infoCliniquesSelectors.getEntities()
     );
+
+    //
+    this.stateApp$ = this.store.select(
+      this.typeDeSallesSelectors.getStateApp()
+    );
+    this.store.select(this.typeDeSallesSelectors.getNotification()).subscribe({
+      next: (data) => (this.notification = data),
+    });
+    this.store.select(this.typeDeSallesSelectors.getError()).subscribe({
+      next: (data) => (this.errorMessage = data),
+    });
   }
 
   //

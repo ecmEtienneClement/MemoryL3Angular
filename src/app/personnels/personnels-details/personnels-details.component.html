@@ -1,4 +1,13 @@
 <div class="container">
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
   <div class="card" *ngIf="personnel$ | async as per">
     <h5 class="card-header">{{ per.nom }}</h5>
     <div class="card-body">
@@ -18,7 +27,7 @@
       <p class="card-text">
         {{ per.age }}
       </p>
-      <h5 *ngIf="per.Poste " class="card-title">Profil</h5>
+      <h5 *ngIf="per.Poste" class="card-title">Profil</h5>
       <p class="card-text">
         {{ per.Poste ? per.Poste.poste : "" }}
       </p>

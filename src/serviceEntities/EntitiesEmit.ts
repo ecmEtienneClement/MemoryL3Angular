@@ -10,6 +10,7 @@ export class EntitiesEmit {
   }
 }
 export interface IEntitiesEmit {
+  idModel? : string
   nameModel: NameModels;
   nameAction: EntitiesActionsTypes;
 }

@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Patient } from 'src/models/Models';
 import { NameModels } from 'src/models/NameModels';
 import { EntitiesActionsTypes } from 'src/ngrx/Entities.actions';
-import { AppState } from 'src/ngrx/Entities.state';
+import { AppState, StateApp } from 'src/ngrx/Entities.state';
+import { RoutesNames } from 'src/routes/routes.config';
 import { EntitiesEmit, IEntitiesEmit } from 'src/serviceEntities/EntitiesEmit';
-import { PatientsActions } from '../ngrx/Patients.ngrx';
+import { PatientsActions, PatientsSelectors } from '../ngrx/Patients.ngrx';
 
 @Component({
   selector: 'app-patients-add',
@@ -16,21 +18,33 @@ import { PatientsActions } from '../ngrx/Patients.ngrx';
 })
 export class PatientsAddComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+  notification: string[] = [];
+  errorMessage: string[] = [];
   //
+  readonly routesName = RoutesNames;
   formPatient!: FormGroup;
   panelOpenState = false;
   grpSanguin: string[] = ['O-', 'O+', 'B-', 'A-', 'AB+', 'AB-'];
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private patientsActions: PatientsActions
+    private patientsActions: PatientsActions,
+    private patientsSelectors: PatientsSelectors,
+    private router: Router
   ) {}
   //
   ngOnInit() {
     this.initForm();
     this.store.dispatch(this.patientsActions.getAllEntities()());
     //
-
+    this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
+    this.store.select(this.patientsSelectors.getNotification()).subscribe({
+      next: (data) => (this.notification = data),
+    });
+    this.store.select(this.patientsSelectors.getError()).subscribe({
+      next: (data) => (this.errorMessage = data),
+    });
     this.sub.add(
       EntitiesEmit.entitiesSub.subscribe({
         next: (data: IEntitiesEmit) => {
@@ -84,7 +98,10 @@ export class PatientsAddComponent implements OnInit, OnDestroy {
       data.nameModel == NameModels.patient &&
       data.nameAction == EntitiesActionsTypes.addEntitieSuccess
     ) {
-      console.log("c'est bien ici");
+      this.router.navigate([
+        `/${this.routesName.mPatient.patients}/${this.routesName.mPatient.patientsDetails}/`,
+        data.idModel,
+      ]);
     }
   }
 

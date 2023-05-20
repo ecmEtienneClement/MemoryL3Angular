@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   PostesActions,
   PostesSelectors,
 } from 'src/app/confi-clinique/ngrx/ngrxPoste/Postes.ngrx';
 import { Personnel, Poste, Sexe } from 'src/models/Models';
-import { AppState } from 'src/ngrx/Entities.state';
+import { NameModels } from 'src/models/NameModels';
+import { EntitiesActionsTypes } from 'src/ngrx/Entities.actions';
+import { AppState, StateApp } from 'src/ngrx/Entities.state';
+import { RoutesNames } from 'src/routes/routes.config';
+import { EntitiesEmit, IEntitiesEmit } from 'src/serviceEntities/EntitiesEmit';
 import {
   PersonnelsActions,
   PersonnelsSelectors,
@@ -18,7 +23,13 @@ import {
   templateUrl: './personnels-upd.component.html',
   styleUrls: ['./personnels-upd.component.scss'],
 })
-export class PersonnelsUpdComponent implements OnInit {
+export class PersonnelsUpdComponent implements OnInit, OnDestroy {
+  sub: Subscription = new Subscription();
+  readonly routesName = RoutesNames;
+  notification: string[] = [];
+  errorMessage: string[] = [];
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+
   //
   formPersonnel!: FormGroup;
   posts: Observable<Poste[]> = new Observable<Poste[]>();
@@ -51,7 +62,8 @@ export class PersonnelsUpdComponent implements OnInit {
     private personnelsActions: PersonnelsActions,
     private postsActions: PostesActions,
     private postsSelectors: PostesSelectors,
-    private personnelsSelectors: PersonnelsSelectors
+    private personnelsSelectors: PersonnelsSelectors,
+    private router: Router
   ) {}
   //
   ngOnInit() {
@@ -59,6 +71,23 @@ export class PersonnelsUpdComponent implements OnInit {
     this.store.dispatch(this.postsActions.getAllEntities()());
     this.posts = this.store.select(this.postsSelectors.getEntities());
     this.patchDataForm();
+
+    //
+    this.stateApp$ = this.store.select(this.personnelsSelectors.getStateApp());
+    this.store.select(this.personnelsSelectors.getNotification()).subscribe({
+      next: (data) => (this.notification = data),
+    });
+    this.store.select(this.personnelsSelectors.getError()).subscribe({
+      next: (data) => (this.errorMessage = data),
+    });
+
+    this.sub.add(
+      EntitiesEmit.entitiesSub.subscribe({
+        next: (data: IEntitiesEmit) => {
+          this.treatmentSub(data);
+        },
+      })
+    );
   }
   //
   initForm() {
@@ -137,5 +166,23 @@ export class PersonnelsUpdComponent implements OnInit {
     this.store.dispatch(
       this.personnelsActions.updEntitie()({ entitie: newPersonnel })
     );
+  }
+
+  //
+  treatmentSub(data: IEntitiesEmit) {
+    if (
+      data.nameModel == NameModels.personnel &&
+      data.nameAction == EntitiesActionsTypes.updEntitieSuccess
+    ) {
+      this.router.navigate([
+        `/${this.routesName.mPersonnel.personnels}/${this.routesName.mPersonnel.personnelsDetails}/`,
+        this.personnel.id,
+      ]);
+    }
+  }
+
+  //
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

@@ -4,6 +4,12 @@ import { RoutesNames } from 'src/routes/routes.config';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./patients/patients.module').then((m) => m.PatientsModule),
+  },
+
+  {
     path: RoutesNames.mPersonnel.personnels,
     loadChildren: () =>
       import('./personnels/personnels.module').then((m) => m.PersonnelsModule),

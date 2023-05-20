@@ -1,6 +1,12 @@
 <div class="container">
   <h1>CONFIG</h1>
-
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
     <a
       class="nav-link active"

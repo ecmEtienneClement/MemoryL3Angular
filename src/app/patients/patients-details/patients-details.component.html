@@ -1,4 +1,13 @@
 <div class="container">
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
   <div class="card" *ngIf="patient$ | async as pat">
     <h5 class="card-header">{{ pat.nom }}</h5>
     <div class="card-body">

@@ -13,7 +13,7 @@ import { EntitiesSelectors } from 'src/ngrx/Entities.selectors';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AppReducer } from 'src/ngrx/Entities.state';
 import { CustomeRouterSerializen } from 'src/ngrx/Router.state';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMateriels } from './sharedModules/materials.modules';
 
 @NgModule({
