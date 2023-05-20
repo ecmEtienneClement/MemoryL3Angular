@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PersonnelsRoutingModule } from './personnels-routing.module';
 import { PersonnelsComponent } from './personnels.component';
 import { StoreModule } from '@ngrx/store';
-import { NameModels } from 'src/models/NameModels';
+import { NameModels } from 'src/app/core/models/NameModels';
 import { EffectsModule } from '@ngrx/effects';
 import { PersonnelsEffects, PersonnelsReducer } from './ngrx/Personnels.ngrx';
 import { PersonnelsAddComponent } from './personnels-add/personnels-add.component';
 import { PersonnelsDetailsComponent } from './personnels-details/personnels-details.component';
-import { AngularMateriels } from '../sharedModules/materials.modules';
+import { AngularMateriels } from '../core/sharedModules/materials.modules';
 import { ConfiCliniqueModule } from '../confi-clinique/confi-clinique.module';
 import { PersonnelsUpdComponent } from './personnels-upd/personnels-upd.component';
-import { ComponentsModule } from '../sharedModules/componentsModule';
+import { ComponentsModule } from '../core/sharedModules/componentsModule';
 
 @NgModule({
   declarations: [

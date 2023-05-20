@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { I } from 'src/models/Models';
+import { I } from 'src/app/core/models/Models';
 import { EntitiesActions } from './Entities.actions';
 import { IEntitiesState, initialeState, StateApp } from './Entities.state';
 

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { I } from 'src/models/Models';
+import { I } from 'src/app/core/models/Models';
 import { EntitiesActions, EntitiesActionsTypes } from './Entities.actions';
 import {
   EntitiesDataAPI,
   IResponseAPI,
-} from '../serviceEntities/EntitiesDataAPI';
+} from 'src/app/core/serviceEntities/EntitiesDataAPI';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { EntitiesEmit } from 'src/serviceEntities/EntitiesEmit';
-import { NameModels } from 'src/models/NameModels';
+import { EntitiesEmit } from 'src/app/core/serviceEntities/EntitiesEmit';
+import { NameModels } from 'src/app/core/models/NameModels';
 
 @Injectable()
 export class EntitiesEffects<T extends I> {

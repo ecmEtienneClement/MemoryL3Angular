@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Patient } from 'src/models/Models';
-import { AppState, StateApp } from 'src/ngrx/Entities.state';
-import { RoutesNames } from 'src/routes/routes.config';
+import { Patient } from 'src/app/core/models/Models';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
 import { PatientsSelectors } from '../ngrx/Patients.ngrx';
 
 @Component({

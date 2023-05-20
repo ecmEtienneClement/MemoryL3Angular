@@ -7,9 +7,9 @@ import {
   Salle,
   TypeDeSalle,
   TypeRendezVous,
-} from 'src/models/Models';
-import { AppState, StateApp } from 'src/ngrx/Entities.state';
-import { RoutesNames } from 'src/routes/routes.config';
+} from 'src/app/core/models/Models';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
 import {
   InfoCliniquesActions,
   InfoCliniquesSelectors,

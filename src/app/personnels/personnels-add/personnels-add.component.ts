@@ -1,18 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, take } from 'rxjs';
+import { Observable,  take } from 'rxjs';
 import {
   PostesActions,
   PostesSelectors,
 } from 'src/app/confi-clinique/ngrx/ngrxPoste/Postes.ngrx';
-import { Personnel, Poste } from 'src/models/Models';
-import { NameModels } from 'src/models/NameModels';
-import { EntitiesActionsTypes } from 'src/ngrx/Entities.actions';
-import { AppState, StateApp } from 'src/ngrx/Entities.state';
-import { RoutesNames } from 'src/routes/routes.config';
-import { EntitiesEmit, IEntitiesEmit } from 'src/serviceEntities/EntitiesEmit';
+import { Personnel, Poste } from 'src/app/core/models/Models';
+import { NameModels } from 'src/app/core/models/NameModels';
+import { EntitiesActionsTypes } from 'src/app/core/ngrx/Entities.actions';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
+import {
+  EntitiesEmit,
+  IEntitiesEmit,
+} from 'src/app/core/serviceEntities/EntitiesEmit';
 import {
   PersonnelsActions,
   PersonnelsSelectors,
@@ -125,15 +128,13 @@ export class PersonnelsAddComponent implements OnInit {
 
   //
   treatmentSub(data: IEntitiesEmit) {
-
     if (
       data.nameModel == NameModels.personnel &&
       data.nameAction == EntitiesActionsTypes.signUpEntitieSuccess
     ) {
-     
       this.router.navigate([
         `/${this.routesName.mPersonnel.personnels}/${this.routesName.mPersonnel.personnelsDetails}/`,
-        data.idModel
+        data.idModel,
       ]);
     }
   }

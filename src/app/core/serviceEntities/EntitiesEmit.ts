@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
-import { NameModels } from 'src/models/NameModels';
-import { EntitiesActionsTypes } from 'src/ngrx/Entities.actions';
+import { NameModels } from 'src/app/core/models/NameModels';
+import { EntitiesActionsTypes } from 'src/app/core/ngrx/Entities.actions';
 
 export class EntitiesEmit {
   public static entitiesSub: Subject<IEntitiesEmit> = new Subject();

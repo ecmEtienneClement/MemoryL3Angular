@@ -1,14 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { Patient } from 'src/models/Models';
-import { NameModels } from 'src/models/NameModels';
-import { EntitiesActionsTypes } from 'src/ngrx/Entities.actions';
-import { AppState, StateApp } from 'src/ngrx/Entities.state';
-import { RoutesNames } from 'src/routes/routes.config';
-import { EntitiesEmit, IEntitiesEmit } from 'src/serviceEntities/EntitiesEmit';
+import { Observable, take } from 'rxjs';
+import { Patient } from 'src/app/core/models/Models';
+import { NameModels } from 'src/app/core/models/NameModels';
+import { EntitiesActionsTypes } from 'src/app/core/ngrx/Entities.actions';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
+import {
+  EntitiesEmit,
+  IEntitiesEmit,
+} from 'src/app/core/serviceEntities/EntitiesEmit';
 import { PatientsActions, PatientsSelectors } from '../ngrx/Patients.ngrx';
 
 @Component({
@@ -16,8 +19,7 @@ import { PatientsActions, PatientsSelectors } from '../ngrx/Patients.ngrx';
   templateUrl: './patients-add.component.html',
   styleUrls: ['./patients-add.component.scss'],
 })
-export class PatientsAddComponent implements OnInit, OnDestroy {
-  sub: Subscription = new Subscription();
+export class PatientsAddComponent implements OnInit {
   stateApp$: Observable<StateApp> = new Observable<StateApp>();
   notification: string[] = [];
   errorMessage: string[] = [];
@@ -45,13 +47,13 @@ export class PatientsAddComponent implements OnInit, OnDestroy {
     this.store.select(this.patientsSelectors.getError()).subscribe({
       next: (data) => (this.errorMessage = data),
     });
-    this.sub.add(
-      EntitiesEmit.entitiesSub.subscribe({
-        next: (data: IEntitiesEmit) => {
-          this.treatmentSub(data);
-        },
-      })
-    );
+
+    //
+    EntitiesEmit.entitiesSub.pipe(take(1)).subscribe({
+      next: (data: IEntitiesEmit) => {
+        this.treatmentSub(data);
+      },
+    });
   }
   //
   initForm() {
@@ -103,10 +105,5 @@ export class PatientsAddComponent implements OnInit, OnDestroy {
         data.idModel,
       ]);
     }
-  }
-
-  //
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StateApp } from 'src/ngrx/Entities.state';
+import { StateApp } from 'src/app/core/ngrx/Entities.state';
 @Component({
   selector: 'app-loading-cmp',
   templateUrl: './loading-cmp.component.html',

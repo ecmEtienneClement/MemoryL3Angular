@@ -8,8 +8,8 @@ import {
   Salle,
   TypeDeSalle,
   TypeRendezVous,
-} from 'src/models/Models';
-import { AppState } from 'src/ngrx/Entities.state';
+} from 'src/app/core/models/Models';
+import { AppState } from 'src/app/core/ngrx/Entities.state';
 import {
   InfoCliniquesActions,
   InfoCliniquesSelectors,
