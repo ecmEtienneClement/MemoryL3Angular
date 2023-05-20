@@ -101,7 +101,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button> 
-      <span>Dashboard</span>
+        <a routerLink="" class="dashboard"><span class="btn"><mat-icon>home</mat-icon>Dashboard</span></a>
     </mat-toolbar>
   
     <router-outlet></router-outlet>

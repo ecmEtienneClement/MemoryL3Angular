@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="card" *ngIf="patient$ | async as pat">
     <h5 class="card-header">{{ pat.nom }}</h5>
     <div class="card-body">
@@ -58,4 +58,93 @@
       >
     </div>
   </div>
-</div>
+</div> -->
+
+
+<!--++++++++ table detail Patient ++++++++ -->
+
+                    <!-- New  Tables  detail patients de santé-->
+                    <main class="black-border">
+                      <div class="toolbar">
+                          <div class="detail"><span class="name text-secondary fs-2 fm-bold fst-italic text-center">Information patient</span>
+                  
+                          </div>                        
+                      </div>
+                      <div class="row mt-4">
+                          <div class="col">
+                              <div class="container-fluid g-0 p-2">
+                                  <!-- premiere info patsonne -->
+                                  <div class="row g-0">
+                                      <div class="col-md-2 d-flex justify-content align-item-center">
+                                          <img src="../../assets/img/md-1.png">
+                                      </div>
+                                      <div class="col ps-2">              
+                                          <div class="row mt-3">
+                                              <div class="col-md">
+                                                  <table class="table table-hover mx-auto ">
+                                                    <mat-card class="example-card"  *ngIf="patient$ | async as pat">
+                                                      <mat-card-header>
+                                                        <mat-card-title>{{ pat.prenom }} {{ pat.nom }}</mat-card-title>
+                                                      </mat-card-header>
+                                                      <mat-card-content>
+                                                        <div>
+                                                          <i><img src="../../assets/img/md-2.png" class="float"></i>
+                                                        </div>
+                                                        <!-- iteration  -->
+                                                        <tr>
+                                                          <th >Proffession</th>
+                                                            <th>Sexe</th>
+                                                            <th>Age</th>
+                                                          <th>Date De Naissance</th>
+                                                          <th>Groupe Sanguin</th>                                                                                                        
+                                                        </tr>
+                                                        <tr>
+                                                          <td>{{ pat.proffession ? pat.proffession : "" }}</td>
+                                                           <td>{{ pat.sexe }}</td>
+                                                           <td> {{ pat.age }}</td>
+                                                          <td> {{ pat.dateDeNaissance }}</td>
+                                                          <td>{{ pat.groupeSanguin }}</td>                                                          
+                                                        </tr>
+                                                        <h6>Date</h6>
+                                                        <p>Le :</p>
+                                                        <mat-divider></mat-divider>
+                                                      </mat-card-content>
+                                                      <mat-card-actions>
+                                                        <div class="d-flex justtify-content">
+                                                         <span><b>Adresse</b> {{ pat.adresse }}</span>
+                                                            <span class="fa fa-phone"><b>{{ pat.telephone }}</b></span>
+                                                                <span><b>Adresse</b> {{ pat.adresse }}</span>
+                                                                    <span class="fa fa-phone"><b>{{ pat.telephone }}</b></span>
+                                                        </div>
+                                                      </mat-card-actions>
+                                                      <mat-card-footer>
+                                                        <div class="row g-0">
+                                                          <div class="col-md-10 text-center">
+
+                                                          </div>
+                                                          <div class="col-md-2 ">
+                                                            <div>
+                                                            </div>
+                                                              <div class="btn-group d-flex justify-content align-item-center" role="group">
+                                                                   <button type="button" class="btn btn-danger"
+                                                                  routerLink="/{{ routesName.mPatient.patients }}"
+                                                                   routerLinkActive="router-link-active"><mat-icon>keyboard_return</mat-icon></button>  
+
+                                                                <button type="button" class="btn btn-primary"  
+                                                                  routerLink="/{{ routesName.mPatient.patients }}/{{ routesName.mPatient.patientsUpd }}/{{ pat.id }}"
+                                                                  ><mat-icon>edit</mat-icon></button>                                                              
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      </mat-card-footer>
+                                                    </mat-card>
+                                                  </table>                
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </main>                  
+

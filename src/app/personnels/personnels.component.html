@@ -1,4 +1,4 @@
-<table class="table">
+<!-- <table class="table">
   <thead class="table-dark">
     <tr>
       <th>Nom</th>
@@ -52,4 +52,94 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+
+<!-- New table personnels -->
+
+<main class="black-border">
+  <div class="toolbar">
+      <div class="personnels">
+          <div class="row mt-0">
+              <div class=" text-center">
+                  <span class="name">Liste des personnels</span>
+              </div>
+          </div>
+      </div>
+      <div class="search-personnel">
+          <input type="search"class="form-control" placeholder="Search personnels">
+      </div>
+      <div class="add-personnel">
+          <button type="button" class="btn btn-outline-success btn-lg"
+          routerLink="{{ routesName.mPersonnel.personnelsAdd }}"
+          routerLinkActive="router-link-active"><mat-icon>add</mat-icon></button>
+      </div>
+      
+      
+  </div>
+  
+  <div class="row mt-4">
+      <div class="col">
+          <div class="container-fluid g-0 p-2">
+             
+              <div class="row g-0">
+                
+                  <div class="col ps-2">
+                      <div class="row mt-3">
+                          <div class="">
+                              <table class="table mx-auto">
+                                  <thead class=" fs-5  text-secondary">
+                                      <tr>
+                                        <th><b>Nom</b></th>
+                                        <th><b>Prenon</b></th>
+                                        <th><b>Age</b></th>
+                                        <th><b>Sexe</b></th>
+                                        <th><b>Telephone</b></th>
+                                        <th></th>
+                                        
+                                         
+                                          
+                                      </tr>
+                                  </thead>
+                                 
+                                      <tr *ngFor="let personnel of personnels | async">
+                                        <td>
+                                          <b>
+                                            {{ personnel.nom }}
+                                          </b>
+                                        </td>
+                                        <td>
+                                          <b>
+                                            {{ personnel.prenom }}
+                                          </b>
+                                        </td>
+                                        <td>{{ personnel.age }}</td>
+                                        <td>{{ personnel.sexe }}</td>
+                                        <td>{{ personnel.telephone }}</td>
+                                          
+                                          
+                                          
+                                          <td>
+                                             
+                                              <button type="button" class=" btn btn-info" routerLink="{{ routesName.mPersonnel.personnelsDetails }}/{{  personnel.id }}"><mat-icon>visibility</mat-icon></button>
+                                              <button type="button" class="btn btn-danger" (click)="deletePersonnel(personnel)"><mat-icon>delete</mat-icon></button>                     
+                                                
+                                          </td>
+                                      </tr>
+                                
+                                   
+                                     
+                                 
+                                </table>
+                              
+
+                          </div>
+                         
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
