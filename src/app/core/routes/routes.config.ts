@@ -14,6 +14,9 @@ export class RoutesNames {
     patientsAdd: 'patientsAdd',
     patientsUpd: 'patientsUpd',
     patientsDetails: 'patientsDetails',
+    patientsDossier: 'patientsDossier',
+    patientsDossierAdd: 'patientsDossierAdd',
+    patientsDossierUpd: 'patientsDossierUpd',
   };
 
   //Route pour le module config

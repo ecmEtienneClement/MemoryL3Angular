@@ -11,6 +11,9 @@ import { PatientsDetailsComponent } from './patients-details/patients-details.co
 import { AngularMateriels } from '../core/sharedModules/materials.modules';
 import { PatientsUpdComponent } from './patients-upd/patients-upd.component';
 import { ComponentsModule } from '../core/sharedModules/componentsModule';
+import { DossierPatientComponent } from './dossierPatient/dossier-patient/dossier-patient.component';
+import { DossierPatientAddComponent } from './dossierPatient/dossier-patient-add/dossier-patient-add.component';
+import { DossierPatientUpdComponent } from './dossierPatient/dossier-patient-upd/dossier-patient-upd.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { ComponentsModule } from '../core/sharedModules/componentsModule';
     PatientsAddComponent,
     PatientsDetailsComponent,
     PatientsUpdComponent,
+    DossierPatientComponent,
+    DossierPatientAddComponent,
+    DossierPatientUpdComponent,
   ],
   imports: [
     CommonModule,

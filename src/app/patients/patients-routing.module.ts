@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoutesNames } from 'src/app/core/routes/routes.config';
+import { DossierPatientAddComponent } from './dossierPatient/dossier-patient-add/dossier-patient-add.component';
+import { DossierPatientUpdComponent } from './dossierPatient/dossier-patient-upd/dossier-patient-upd.component';
+import { DossierPatientComponent } from './dossierPatient/dossier-patient/dossier-patient.component';
 import { PatientsAddComponent } from './patients-add/patients-add.component';
 import { PatientsDetailsComponent } from './patients-details/patients-details.component';
 import { PatientsUpdComponent } from './patients-upd/patients-upd.component';
@@ -16,6 +19,18 @@ const routes: Routes = [
   {
     path: `${RoutesNames.mPatient.patientsDetails}/:id`,
     component: PatientsDetailsComponent,
+  },
+  {
+    path: `${RoutesNames.mPatient.patientsDossier}/:id`,
+    component: DossierPatientComponent,
+  },
+  {
+    path: `${RoutesNames.mPatient.patientsDossierAdd}`,
+    component: DossierPatientAddComponent,
+  },
+  {
+    path: `${RoutesNames.mPatient.patientsDossierUpd}/:id`,
+    component: DossierPatientUpdComponent,
   },
 ];
 
