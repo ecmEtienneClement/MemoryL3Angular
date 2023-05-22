@@ -1,5 +1,7 @@
 export interface I {
   id?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 export interface J extends I {
   nom: string;

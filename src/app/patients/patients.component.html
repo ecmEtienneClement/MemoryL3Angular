@@ -53,6 +53,15 @@
 </table>  -->
 
 <!-- New table patients -->
+                       
+
+<ng-container *ngIf="stateApp$ | async as stateApp">
+  <app-loading-cmp
+    [dataState]="stateApp"
+    [notification]="notification"
+    [errorMessage]="errorMessage"
+  ></app-loading-cmp>
+</ng-container>
 
 <main class="black-border">
   <div class="toolbar">
