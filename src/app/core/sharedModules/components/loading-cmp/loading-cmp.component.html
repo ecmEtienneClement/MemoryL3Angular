@@ -1,0 +1,33 @@
+<div class="container mt-2" [ngSwitch]="dataState">
+  <!-- **************ETAT INITIAL****************** -->
+
+  <ng-container class="col-12" *ngSwitchCase="dataStateEnum.initiale">
+    <div *ngIf="isInitial" class="alert alert-info">
+      <strong> {{ getInitial() }} </strong>
+    </div>
+  </ng-container>
+
+  <!-- **************ETAT EN CHARGEMENT****************** -->
+  <ng-container class="col-12" *ngSwitchCase="dataStateEnum.loading">
+    <div class="alert alert-info">
+      <strong>Veillez patienter ...</strong>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  </ng-container>
+
+  <!-- **************ETAT CHARGER****************** -->
+  <ng-container class="col-12" *ngSwitchCase="dataStateEnum.loaded">
+    <div *ngIf="isNotification" class="alert alert-success">
+      <strong>{{ getNotification() }}</strong>
+    </div>
+  </ng-container>
+
+  <!-- **************ETAT ERREUR****************** -->
+  <ng-container class="col-12" *ngSwitchCase="dataStateEnum.error">
+    <div class="alert alert-danger">
+      <strong>{{ errorMessage[0] ? errorMessage[0].error.message : "" }}</strong>
+    </div>
+  </ng-container>
+</div>
+
+

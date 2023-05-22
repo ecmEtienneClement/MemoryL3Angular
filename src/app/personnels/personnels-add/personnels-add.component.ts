@@ -1,14 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable,  take } from 'rxjs';
 import {
   PostesActions,
   PostesSelectors,
 } from 'src/app/confi-clinique/ngrx/ngrxPoste/Postes.ngrx';
-import { Personnel, Poste } from 'src/models/Models';
-import { AppState } from 'src/ngrx/Entities.state';
-import { PersonnelsActions } from '../ngrx/Personnels.ngrx';
+import { Personnel, Poste } from 'src/app/core/models/Models';
+import { NameModels } from 'src/app/core/models/NameModels';
+import { EntitiesActionsTypes } from 'src/app/core/ngrx/Entities.actions';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
+import {
+  EntitiesEmit,
+  IEntitiesEmit,
+} from 'src/app/core/serviceEntities/EntitiesEmit';
+import {
+  PersonnelsActions,
+  PersonnelsSelectors,
+} from '../ngrx/Personnels.ngrx';
 
 @Component({
   selector: 'app-personnels-add',
@@ -16,6 +27,11 @@ import { PersonnelsActions } from '../ngrx/Personnels.ngrx';
   styleUrls: ['./personnels-add.component.scss'],
 })
 export class PersonnelsAddComponent implements OnInit {
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+  readonly routesName = RoutesNames;
+
+  notification: string[] = [];
+  errorMessage: string[] = [];
   //
   formPersonnel!: FormGroup;
   posts: Observable<Poste[]> = new Observable<Poste[]>();
@@ -34,18 +50,34 @@ export class PersonnelsAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private personnelsActions: PersonnelsActions,
+    private personnelsSelectors: PersonnelsSelectors,
     private postsActions: PostesActions,
-    private postsSelectors: PostesSelectors
+    private postsSelectors: PostesSelectors,
+    private router: Router
   ) {}
   //
   ngOnInit() {
     this.initForm();
     this.store.dispatch(this.postsActions.getAllEntities()());
     this.posts = this.store.select(this.postsSelectors.getEntities());
+
+    //
+    this.stateApp$ = this.store.select(this.personnelsSelectors.getStateApp());
+    this.store.select(this.personnelsSelectors.getNotification()).subscribe({
+      next: (data) => (this.notification = data),
+    });
+    this.store.select(this.personnelsSelectors.getError()).subscribe({
+      next: (data) => (this.errorMessage = data),
+    });
+
+    EntitiesEmit.entitiesSub.pipe(take(1)).subscribe({
+      next: (data: IEntitiesEmit) => {
+        this.treatmentSub(data);
+      },
+    });
   }
   //
   initForm() {
-    //  const heure = new FormControl();
     this.formPersonnel = this.formBuilder.group({
       nom: [null, [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       prenom: [null, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
@@ -92,5 +124,18 @@ export class PersonnelsAddComponent implements OnInit {
     this.store.dispatch(
       this.personnelsActions.signUpEntitie()({ entitie: newPersonnel })
     );
+  }
+
+  //
+  treatmentSub(data: IEntitiesEmit) {
+    if (
+      data.nameModel == NameModels.personnel &&
+      data.nameAction == EntitiesActionsTypes.signUpEntitieSuccess
+    ) {
+      this.router.navigate([
+        `/${this.routesName.mPersonnel.personnels}/${this.routesName.mPersonnel.personnelsDetails}/`,
+        data.idModel,
+      ]);
+    }
   }
 }

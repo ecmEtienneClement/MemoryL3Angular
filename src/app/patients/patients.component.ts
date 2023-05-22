@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Patient } from 'src/models/Models';
-import { RoutesNames } from 'src/routes/routes.config';
+import { Patient } from 'src/app/core/models/Models';
+import { StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
 import { PatientsActions, PatientsSelectors } from './ngrx/Patients.ngrx';
 
 @Component({
@@ -13,6 +14,9 @@ import { PatientsActions, PatientsSelectors } from './ngrx/Patients.ngrx';
 export class PatientsComponent implements OnInit {
   patients: Observable<Patient[]> = new Observable<Patient[]>();
   readonly routesName = RoutesNames;
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+  notification: string[] = [];
+  errorMessage: string[] = [];
 
   constructor(
     private store: Store,
@@ -22,6 +26,15 @@ export class PatientsComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(this.patientsActions.getAllEntities()());
     this.patients = this.store.select(this.patientsSelectors.getEntities());
+
+    //
+    this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
+    this.store.select(this.patientsSelectors.getNotification()).subscribe({
+      next: (data) => (this.notification = data),
+    });
+    this.store.select(this.patientsSelectors.getError()).subscribe({
+      next: (data) => (this.errorMessage = data),
+    });
   }
 
   //

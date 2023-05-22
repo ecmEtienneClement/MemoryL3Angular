@@ -1,4 +1,16 @@
 <!-- <table class="table">
+                          PARTI LOADING             -->
+
+<ng-container *ngIf="stateApp$ | async as stateApp">
+  <app-loading-cmp
+    [dataState]="stateApp"
+    [notification]="notification"
+    [errorMessage]="errorMessage"
+  ></app-loading-cmp>
+</ng-container>
+
+<!--                                   /                            -->
+<!-- <table class="table">
   <thead class="table-dark">
     <tr>
       <th>Nom</th>
@@ -20,7 +32,7 @@
   </thead>
 
   <tbody>
-    <tr class="tr" *ngFor="let personnel of personnels | async">
+    <tr class="tr" *ngFor="let personnel of personnels$ | async">
       <td>
         {{ personnel.nom }}
       </td>
@@ -52,7 +64,7 @@
       </td>
     </tr>
   </tbody>
-</table> -->
+</table>  -->
 
 
 <!-- New table personnels -->
@@ -102,7 +114,7 @@
                                       </tr>
                                   </thead>
                                  
-                                      <tr *ngFor="let personnel of personnels | async">
+                                      <tr *ngFor="let personnel of personnels$ | async">
                                         <td>
                                           <b>
                                             {{ personnel.nom }}

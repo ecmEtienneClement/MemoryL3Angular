@@ -18,7 +18,7 @@
       <p class="card-text">
         {{ per.age }}
       </p>
-      <h5 *ngIf="per.Poste " class="card-title">Profil</h5>
+      <h5 *ngIf="per.Poste" class="card-title">Profil</h5>
       <p class="card-text">
         {{ per.Poste ? per.Poste.poste : "" }}
       </p>
@@ -67,7 +67,12 @@
                       <div class="toolbar">
                           <div class="detail"><span class="name text-secondary fs-2 fm-bold fst-italic text-center">Information Personnel</span>
                   
-                          </div>                        
+                          </div>
+                          <div class="logo-hopital">
+                            <div>
+                              <i><img src="../../assets/img/md-4.gif" class="float"></i>
+                            </div>
+                        </div>                        
                       </div>
                       <div class="row mt-4">
                           <div class="col">
@@ -81,13 +86,13 @@
                                           <div class="row mt-3">
                                               <div class="col-md">
                                                   <table class="table table-hover mx-auto ">
-                                                    <mat-card class="example-card"  *ngIf="personnel$ | async as per">
+                                                    <mat-card class="example-card shadow-lg p-3 mb-5 bg-body-tertiary rounded"  *ngIf="personnel$ | async as per">
                                                       <mat-card-header>
                                                         <mat-card-title>{{ per.prenom }} {{ per.nom }}</mat-card-title>
                                                       </mat-card-header>
                                                       <mat-card-content>
                                                         <div>
-                                                          <i><img src="../../assets/img/md-4.gif" class="float"></i>
+                                                          <i><img src="../../assets/img/md-2.png" class="float"></i>
                                                         </div>
                                                         <!-- iteration  -->
                                                         <tr  *ngIf="per.Poste ">
@@ -104,9 +109,13 @@
                                                           <td> {{ per.age }}</td>
                                                           <td>{{ per.salaire }}</td>                                                          
                                                         </tr>
-                                                        <h6>Jour(s) de travail</h6>
-                                                        <p *ngFor="let jour of per.jour" class="card-jours">{{ jour }}</p>
-                                                        <mat-divider></mat-divider>
+                                                        <div class="horaire">
+                                                          <h6>Jour(s) de travail</h6>
+                                                          <i *ngFor="let jour of per.jour" class="card-jours">{{ jour }} </i>
+                                                          
+                                                     
+                                                        </div>                                                    
+                                                         <mat-divider></mat-divider>
                                                       </mat-card-content>
                                                       <mat-card-actions>
                                                         <div class="d-flex justtify-content">
@@ -143,5 +152,7 @@
                               </div>
                           </div>
                       </div>
-                  </main>                  
-
+                  </main>     
+                  
+                  
+                  

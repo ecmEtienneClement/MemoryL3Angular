@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { NameModels } from 'src/models/NameModels';
+import { NameModels } from 'src/app/core/models/NameModels';
 import { EffectsModule } from '@ngrx/effects';
 import { PostesEffects, PostesReducer } from './Postes.ngrx';
 

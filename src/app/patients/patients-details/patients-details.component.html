@@ -68,7 +68,13 @@
                       <div class="toolbar">
                           <div class="detail"><span class="name text-secondary fs-2 fm-bold fst-italic text-center">Information patient</span>
                   
-                          </div>                        
+                          </div>     
+                          <div class="logo-hopital">
+                            <div>
+                              <i><img src="../../assets/img/md-4.gif" class="float"></i>
+                            </div>
+                        </div>
+                                             
                       </div>
                       <div class="row mt-4">
                           <div class="col">
@@ -82,7 +88,7 @@
                                           <div class="row mt-3">
                                               <div class="col-md">
                                                   <table class="table table-hover mx-auto ">
-                                                    <mat-card class="example-card"  *ngIf="patient$ | async as pat">
+                                                    <mat-card class="example-card shadow-lg p-3 mb-5 bg-body-tertiary rounded"  *ngIf="patient$ | async as pat">
                                                       <mat-card-header>
                                                         <mat-card-title>{{ pat.prenom }} {{ pat.nom }}</mat-card-title>
                                                       </mat-card-header>
@@ -105,16 +111,13 @@
                                                           <td> {{ pat.dateDeNaissance }}</td>
                                                           <td>{{ pat.groupeSanguin }}</td>                                                          
                                                         </tr>
-                                                        <h6>Date</h6>
-                                                        <p>Le :</p>
-                                                        <mat-divider></mat-divider>
+                                                        
+                                                        <!-- <mat-divider></mat-divider> -->
                                                       </mat-card-content>
                                                       <mat-card-actions>
                                                         <div class="d-flex justtify-content">
                                                          <span><b>Adresse</b> {{ pat.adresse }}</span>
-                                                            <span class="fa fa-phone"><b>{{ pat.telephone }}</b></span>
-                                                                <span><b>Adresse</b> {{ pat.adresse }}</span>
-                                                                    <span class="fa fa-phone"><b>{{ pat.telephone }}</b></span>
+                                                            <span class="fa fa-phone"><b>{{ pat.telephone }}</b></span>                                                              
                                                         </div>
                                                       </mat-card-actions>
                                                       <mat-card-footer>
@@ -148,3 +151,31 @@
                       </div>
                   </main>                  
 
+
+                    <!-- just un exemple,j'attend les actions pour continuer -->
+                  <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          This is the expansion title
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          This is a summary of the content
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>This is the primary content of the panel.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>I'm visible because I am open</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                  

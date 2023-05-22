@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RoutesNames } from 'src/routes/routes.config';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
 
 // #####
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RoutesNames } from 'src/routes/routes.config';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
 import { ConfiCliniqueComponent } from './confi-clinique.component';
 import { ConfigCliniqueAddComponent } from './config-clinique-add/config-clinique-add.component';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { I } from 'src/models/Models';
-import { NameModels } from 'src/models/NameModels';
+import { I } from 'src/app/core/models/Models';
+import { NameModels } from 'src/app/core/models/NameModels';
 import { IEntitiesState } from './Entities.state';
 import { getRouter } from './Router.selectores';
 import { customeRouterState } from './Router.state';

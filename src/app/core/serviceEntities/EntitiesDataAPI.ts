@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 import { environment } from 'src/env/env';
-import { I } from 'src/models/Models';
-import { NameModels } from 'src/models/NameModels';
+import { I } from 'src/app/core/models/Models';
+import { NameModels } from 'src/app/core/models/NameModels';
 
 @Injectable()
 export class EntitiesDataAPI<T extends I> {

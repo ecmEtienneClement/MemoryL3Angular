@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Patient } from 'src/models/Models';
-import { AppState } from 'src/ngrx/Entities.state';
-import { RoutesNames } from 'src/routes/routes.config';
+import { Patient } from 'src/app/core/models/Models';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
+import { RoutesNames } from 'src/app/core/routes/routes.config';
 import { PatientsSelectors } from '../ngrx/Patients.ngrx';
 
 @Component({
@@ -14,6 +14,11 @@ import { PatientsSelectors } from '../ngrx/Patients.ngrx';
 export class PatientsDetailsComponent {
   patient$: Observable<Patient> = new Observable();
   readonly routesName = RoutesNames;
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+  notification: string[] = [];
+  errorMessage: string[] = [];
+
+  panelOpenState = false ;
 
   constructor(
     private store: Store<AppState>,
@@ -23,5 +28,14 @@ export class PatientsDetailsComponent {
     this.patient$ = <Observable<Patient>>(
       this.store.select(this.patientsSelectors.getEntitieById())
     );
+
+    //
+    this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
+    this.store.select(this.patientsSelectors.getNotification()).subscribe({
+      next: (data) => (this.notification = data),
+    });
+    this.store.select(this.patientsSelectors.getError()).subscribe({
+      next: (data) => (this.errorMessage = data),
+    });
   }
 }

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { TypeRendezVous } from 'src/models/Models';
-import { NameModels } from 'src/models/NameModels';
-import { EntitiesActions } from 'src/ngrx/Entities.actions';
-import { EntitiesEffects } from 'src/ngrx/Entities.effects';
-import { EntitiesReducer } from 'src/ngrx/Entities.reducer';
-import { EntitiesSelectors } from 'src/ngrx/Entities.selectors';
-import { EntitiesNameAPI, IEntitiesState } from 'src/ngrx/Entities.state';
+import { TypeRendezVous } from 'src/app/core/models/Models';
+import { NameModels } from 'src/app/core/models/NameModels';
+import { EntitiesActions } from 'src/app/core/ngrx/Entities.actions';
+import { EntitiesEffects } from 'src/app/core/ngrx/Entities.effects';
+import { EntitiesReducer } from 'src/app/core/ngrx/Entities.reducer';
+import { EntitiesSelectors } from 'src/app/core/ngrx/Entities.selectors';
+import { EntitiesNameAPI, IEntitiesState } from 'src/app/core/ngrx/Entities.state';
 import { TypeRVApiService } from './TypesRVApiService';
 
 //TODO NGRX TYPERENDEZVOUS STATE

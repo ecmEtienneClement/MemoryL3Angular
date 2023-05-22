@@ -1,6 +1,15 @@
 <div class="container">
   <h1>PERSONNEL</h1>
+  <!--                            PARTI LOADING             -->
 
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
+  <!--                    ***************************            -->
   <form
     [formGroup]="formPersonnel"
     (ngSubmit)="submitForm()"
