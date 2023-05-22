@@ -7,15 +7,12 @@
       [errorMessage]="errorMessage"
     ></app-loading-cmp>
   </ng-container>
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-    <a
-      class="nav-link active"
-      aria-current="page"
-      routerLink="{{ routesName.mConfig.configAdd }}"
-      routerLinkActive="router-link-active"
-      >Config add</a
-    >
-  </button>
+  
+  <div class="add-personnel">
+    <button type="button" class="btn btn-primary btn-lg"
+    routerLink="{{ routesName.mConfig.configAdd }}"
+    routerLinkActive="router-link-active"><mat-icon>settings</mat-icon>Config add</button>
+</div>
 
   <!--                             INFO CLINIQUE                            -->
 

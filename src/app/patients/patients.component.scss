@@ -1,0 +1,75 @@
+// .black-border{
+// border: 1px solid black;
+// }
+
+main{
+    width: 90%;
+    margin: 3rem auto 0px;;
+}
+.toolbar{
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-patient{
+    width:"20%";
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-patient{
+    width: 50%;
+    height: 60%;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 1px black;
+
+}
+.search-patient input{
+width: 100%;
+height: 100%;
+border-radius: 5px;
+font-size: 1.2rem;
+}  
+//iformation du tablau
+table{
+    width: 90%;
+   text-align: center;
+   padding: 5px;
+
+  
+    
+    
+
+}
+tr{
+    
+    background: #fff;
+    border-bottom: 1px solid black;
+    
+
+}
+td{
+  
+    border-bottom: 5px solid #ebe8e8;
+}
+.btn{
+    float: right;
+    color: black;
+}
+.btn-info{
+    background: rgb(46, 141, 230);
+}
+.btn-danger{
+    background: red;
+}
+.name{
+    font-size: 2rem;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.5px;
+
+   // border: 1pt solid black;
+    border-radius: 10px;
+   // padding: 0px 2rem;
+}

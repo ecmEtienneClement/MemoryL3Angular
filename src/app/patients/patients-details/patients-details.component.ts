@@ -18,6 +18,8 @@ export class PatientsDetailsComponent {
   notification: string[] = [];
   errorMessage: string[] = [];
 
+  panelOpenState = false ;
+
   constructor(
     private store: Store<AppState>,
     private patientsSelectors: PatientsSelectors

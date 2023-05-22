@@ -1,14 +1,4 @@
-<!--                            PARTI LOADING             -->
-
-<ng-container *ngIf="stateApp$ | async as stateApp">
-  <app-loading-cmp
-    [dataState]="stateApp"
-    [notification]="notification"
-    [errorMessage]="errorMessage"
-  ></app-loading-cmp>
-</ng-container>
-
-<table class="table">
+<!-- <table class="table">
   <thead class="table-dark">
     <tr>
       <th>Nom</th>
@@ -60,4 +50,97 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table>  -->
+
+<!-- New table patients -->
+
+<main class="black-border">
+  <div class="toolbar">
+      <div class="patients">
+          <div class="row mt-0">
+              <div class=" text-center">
+                  <span class="name">Liste des Patients</span>
+              </div>
+          </div>
+      </div>
+      <div class="search-patient">
+          <input type="search"class="form-control" placeholder="Search Patients">
+      </div>
+      <div class="add-patient">
+          <button type="button" class="btn btn-outline-success btn-lg"
+          routerLink="{{ routesName.mPatient.patientsAdd }}"
+          routerLinkActive="router-link-active"><mat-icon>add</mat-icon></button>
+      </div>
+      
+      
+  </div>
+  
+  <div class="row mt-4">
+      <div class="col">
+          <div class="container-fluid g-0 p-2">
+             
+              <div class="row g-0">
+                
+                  <div class="col ps-2">
+                      <div class="row mt-3">
+                          <div class="">
+                              <table class="table mx-auto">
+                                  <thead class=" fs-5  text-secondary">
+                                      <tr>
+                                        <th><b>Nom</b></th>
+                                        <th><b>Prenon</b></th>
+                                        <th><b>Age</b></th>
+                                        <th><b>Sexe</b></th>
+                                        <th><b>Telephone</b></th>
+                                        <th></th>
+                                        
+                                         
+                                          
+                                      </tr>
+                                  </thead>
+                                 
+                                      <tr *ngFor="let patient of patients | async">
+                                        <td>
+                                          <b>
+                                            {{ patient.nom }}
+                                          </b>
+                                        </td>
+                                        <td>
+                                          <b>
+                                            {{ patient.prenom }}
+                                          </b>
+                                        </td>
+                                        <td>{{ patient.age }}</td>
+                                        <td>{{ patient.sexe }}</td>
+                                        <td>{{ patient.telephone }}</td>
+                                          
+                                          
+                                          
+                                          <td>
+                                             
+                                              <button type="button" class=" btn btn-info" routerLink="{{ routesName.mPatient.patientsDetails }}/{{  patient.id }}"><mat-icon>visibility</mat-icon></button>
+                                              <button type="button" class="btn btn-danger" (click)="deletePatient(patient)"><mat-icon>delete</mat-icon></button>                     
+                                                
+                                          </td>
+                                      </tr>
+                                
+                                   
+                                     
+                                 
+                                </table>
+                              
+
+                          </div>
+                         
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
+
+
+
+
