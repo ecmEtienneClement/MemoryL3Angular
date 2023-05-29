@@ -225,9 +225,9 @@ export class DossierPatientDetailsComponent implements OnInit, OnDestroy {
     this.store.select(this.consultationsSelectors.getNotification()).subscribe({
       next: (data) => {
         this.notification = data;
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3000);
+        this.consultations = this.consultations.filter(
+          (e) => e.id != consultation.id
+        );
       },
     });
     this.store.select(this.consultationsSelectors.getError()).subscribe({
@@ -244,9 +244,9 @@ export class DossierPatientDetailsComponent implements OnInit, OnDestroy {
     this.store.select(this.antecedentsSelectors.getNotification()).subscribe({
       next: (data) => {
         this.notification = data;
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3000);
+        this.antecedents = this.antecedents.filter(
+          (e) => e.id != antecedent.id
+        );
       },
     });
     this.store.select(this.antecedentsSelectors.getError()).subscribe({
@@ -263,9 +263,9 @@ export class DossierPatientDetailsComponent implements OnInit, OnDestroy {
     this.store.select(this.ordonnancesSelectors.getNotification()).subscribe({
       next: (data) => {
         this.notification = data;
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3000);
+        this.ordonnances = this.ordonnances.filter(
+          (e) => e.id != ordonnance.id
+        );
       },
     });
     this.store.select(this.ordonnancesSelectors.getError()).subscribe({
@@ -282,9 +282,8 @@ export class DossierPatientDetailsComponent implements OnInit, OnDestroy {
     this.store.select(this.rendezVoussSelectors.getNotification()).subscribe({
       next: (data) => {
         this.notification = data;
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3000);
+
+        this.rendezVous = this.rendezVous.filter((e) => e.id != rv.id);
       },
     });
     this.store.select(this.rendezVoussSelectors.getError()).subscribe({
@@ -300,9 +299,7 @@ export class DossierPatientDetailsComponent implements OnInit, OnDestroy {
     this.store.select(this.payementsSelectors.getNotification()).subscribe({
       next: (data) => {
         this.notification = data;
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3000);
+        this.payements = this.payements.filter((e) => e.id != payement.id);
       },
     });
     this.store.select(this.payementsSelectors.getError()).subscribe({

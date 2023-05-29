@@ -1,4 +1,14 @@
 <div class="container">
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
   <div class="row">
     <div class="col-12">
       <a
