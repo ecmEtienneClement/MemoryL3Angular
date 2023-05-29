@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./dossier-patient.component.scss']
 })
 export class DossierPatientComponent {
-
+  panelOpenState = false ;
 }
