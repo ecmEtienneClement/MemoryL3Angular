@@ -37,6 +37,9 @@ export class EntitiesSelectors<T extends I> {
       getRouter,
       (state: IEntitiesState<T>, router: customeRouterState) => {
         if (state.entities && router.params['id']) {
+          //
+          localStorage.setItem('idRoute', router.params['id']);
+          //
           return state.entities.find(
             (entitie) => entitie.id == router.params['id']
           );

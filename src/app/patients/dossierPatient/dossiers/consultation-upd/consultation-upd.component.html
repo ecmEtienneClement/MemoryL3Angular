@@ -1,0 +1,166 @@
+<div class="container">
+  <a
+    class="aa"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDossierDetails
+    }}/{{ idDossier }}"
+  >
+    Retour</a
+  >
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <h1>Modifier Consultation</h1>
+
+  <form
+    [formGroup]="formConsultation"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <div class="row g-3">
+      <!--                            poids                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Poids</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="72"
+            formControlName="poids"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            taille                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Taille</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="..."
+            formControlName="taille"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            temperature                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Temperature</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="..."
+            formControlName="temperature"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <!--                            frequenceCardiaque                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Frequence Cardiaque</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="..."
+            formControlName="frequenceCardiaque"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            pressionArterielle                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Pression arterielle</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="..."
+            formControlName="pressionArterielle"
+          />
+        </mat-form-field>
+      </div>
+      <!--                            PERSONNEL                           -->
+      <div class="col form-group" *ngIf="personnels$ | async as personnel">
+        <mat-form-field appearance="outline">
+          <mat-label>Personnels</mat-label>
+          <mat-select formControlName="personnel">
+            <mat-option *ngFor="let per of personnel" [value]="per.id"
+              >{{ per.prenom }} - {{ per.nom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row g-3">
+      <!--                            Diagnostic                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Diagnostic medical</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="diagnostiqueMedical"
+            placeholder="Le diagnostic ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col form-group"></div>
+    </div>
+
+    <div class="card mt-2" *ngIf="formConsultation$ | async as form">
+      <div class="card-body">
+        <div class="row mt-2">
+          <div class="col-4">
+            <h5 class="card-title">Poids</h5>
+            <p class="card-text">{{ form.poids }}</p>
+          </div>
+          <div class="col-4">
+            <h5 class="card-title">Taille</h5>
+            <p class="card-text">{{ form.taille }}</p>
+          </div>
+          <div class="col-4">
+            <h5 class="card-title">Temperature</h5>
+            <p class="card-text">{{ form.temperature }}</p>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-4">
+            <h5 class="card-title">Frequence Cardiaque</h5>
+            <p class="card-text">{{ form.frequenceCardiaque }}</p>
+          </div>
+          <div class="col-4">
+            <h5 class="card-title">Pression Arterielle</h5>
+            <p class="card-text">{{ form.pressionArterielle }}</p>
+          </div>
+          <div class="col-4">
+            <h5 class="card-title">Imc</h5>
+            <p class="card-text">{{ imc }}</p>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <h5 class="card-title">Diagnosti Medical</h5>
+            <p class="card-text">{{ form.diagnostiqueMedical }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

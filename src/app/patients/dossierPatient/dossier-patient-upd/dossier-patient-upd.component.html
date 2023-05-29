@@ -1,1 +1,114 @@
-<p>dossier-patient-upd works!</p>
+<div class="container">
+  <a
+    class="aa"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDossier
+    }}/{{ idPatient }}"
+  >
+    Retour</a
+  >
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <h1>Modifier dossier patient</h1>
+
+  <form
+    [formGroup]="formDossierPatient"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <div class="row g-3">
+      <!--                            MOTIF                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Motif</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="motif"
+            placeholder="Le motif ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            HISTOIR                           -->
+
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Histoire</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="histoire"
+            placeholder="L'histoir ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            TERAIN                           -->
+
+      <div class="col form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Terrain</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="terrain"
+            placeholder="Le terrain ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!--                            PERSONNEL                           -->
+    <div class="row g-3">
+      <div class="col form-group" *ngIf="personnels$ | async as personnel">
+        <mat-form-field appearance="outline">
+          <mat-label>Personnels</mat-label>
+          <mat-select formControlName="personnel">
+            <mat-option *ngFor="let per of personnel" [value]="per.id"
+              >{{ per.prenom }} - {{ per.nom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--                            SALLE                           -->
+      <div class="col form-group">
+        <mat-form-field appearance="outline" *ngIf="salles$ | async as salles">
+          <mat-label>Salle</mat-label>
+          <mat-select formControlName="salle">
+            <mat-option *ngFor="let salle of salles" [value]="salle.id"
+              >- {{ salle.numero }} - {{ salle.place }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col form-group"></div>
+    </div>
+
+    <div class="card mt-2" *ngIf="formDossierPatient$ | async as form">
+      <div class="card-body">
+        <h5 class="card-title">Motif</h5>
+        <p class="card-text">{{ form.motif }}</p>
+
+        <h5 class="card-title">histoire</h5>
+        <p class="card-text">{{ form.histoire }}</p>
+
+        <h5 class="card-title">Terrain</h5>
+        <p class="card-text">{{ form.terrain }}</p>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

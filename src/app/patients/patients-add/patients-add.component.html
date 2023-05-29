@@ -99,17 +99,23 @@
     <!--                            ROW                           -->
     <div class="row g-3">
       <!--                            DATE DE NAISSANCE                           -->
-      <div class="col form-group">
-        <mat-form-field appearance="outline">
+      <div class="col frm-group">
+        <mat-form-field class="example-full-width">
           <mat-label>Date de naissance</mat-label>
           <input
-            type="datetime"
-            matInput
-            placeholder="17/05/90"
             formControlName="dateDeNaissance"
+            matInput
+            [matDatepicker]="picker"
           />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
         </mat-form-field>
       </div>
+
       <!--                            Groupe sanguin                           -->
       <div class="col form-group">
         <mat-form-field appearance="outline">

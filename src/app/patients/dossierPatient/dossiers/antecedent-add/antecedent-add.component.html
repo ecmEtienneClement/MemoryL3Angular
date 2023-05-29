@@ -1,0 +1,138 @@
+<div class="container">
+  <a
+    class="aa"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDossierDetails
+    }}/{{ idDossier }}"
+  >
+    Retour</a
+  >
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <h1>Ajouter Antecedent</h1>
+
+  <form
+    [formGroup]="formAntecedent"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <div class="row g-3">
+      <!--                            allergie                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Allergie</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="allergie"
+            placeholder="L'allergie ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            medicaux                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Médicaux</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="medicaux"
+            placeholder="..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            chirugicaux                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Chirugicaux</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="chirugicaux"
+            placeholder="..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <!--                            familiaire                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Familiaire</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="familiaire"
+            placeholder="..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            autre                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Autres</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="autre"
+            placeholder="..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            PERSONNEL                           -->
+      <div class="col form-group" *ngIf="personnels$ | async as personnel">
+        <mat-form-field appearance="outline">
+          <mat-label>Personnels</mat-label>
+          <mat-select formControlName="personnel">
+            <mat-option *ngFor="let per of personnel" [value]="per.id"
+              >{{ per.prenom }} - {{ per.nom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="card mt-2" *ngIf="formAntecedent$ | async as form">
+      <div class="card-body">
+        <div class="row mt-2">
+          <div class="col-12">
+            <h5 class="card-title">Allergie</h5>
+            <p class="card-text">{{ form.allergie }}</p>
+          </div>
+          <div class="col-12">
+            <h5 class="card-title">Medicaux</h5>
+            <p class="card-text">{{ form.medicaux }}</p>
+          </div>
+          <div class="col-12">
+            <h5 class="card-title">chirugicaux</h5>
+            <p class="card-text">{{ form.chirugicaux }}</p>
+          </div>
+          <div class="col-12">
+            <h5 class="card-title">Familiaire</h5>
+            <p class="card-text">{{ form.familiaire }}</p>
+          </div>
+          <div class="col-12">
+            <h5 class="card-title">Autres</h5>
+            <p class="card-text">{{ form.autre }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

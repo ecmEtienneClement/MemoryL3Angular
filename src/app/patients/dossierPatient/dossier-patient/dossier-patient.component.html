@@ -1,1 +1,132 @@
-<p>dossier-patient works!</p>
+<div class="container">
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <a
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDetails
+    }}/{{ id }}"
+  >
+    Retour</a
+  >
+  <a
+    class="aa"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDossierAdd
+    }}"
+  >
+    Ajoutez Dossier Patient</a
+  >
+  <ng-container *ngIf="dossierPatient.length > 0">
+    <!--                                                         -->
+    <mat-accordion *ngFor="let dossier of dossierPatient">
+      <mat-expansion-panel
+        class="mt-2"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Numero dossier : {{ dossier.numeroDossier }}
+          </mat-panel-title>
+          <mat-panel-description>
+            <a
+              class="aa"
+              routerLink="/{{ routesName.mPatient.patients }}/{{
+                routesName.mPatient.patientsDossierDetails
+              }}/{{ dossier.id }}"
+            >
+              Voir détails dossier patient</a
+            >
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!--              UPDATE              -->
+        <div class="row mt-2">
+          <div class="col-12">
+            <a
+              class="aa"
+              routerLink="/{{ routesName.mPatient.patients }}/{{
+                routesName.mPatient.patientsDossierUpd
+              }}/{{ dossier.id }}"
+            >
+              Modifier</a
+            >
+          </div>
+        </div>
+        <!--              DATE              -->
+        <div class="row mt-2">
+          <div class="col-12"><b>Date </b></div>
+          <div class="col-6">Date de creation</div>
+          <div class="col-6">{{ dossier.createdAt | date : "shortDate" }}</div>
+
+          <div class="col-6">Dernier modification</div>
+          <div class="col-6">{{ dossier.updatedAt | date : "shortDate" }}</div>
+        </div>
+
+        <!--              MOTIF              -->
+        <div class="row mt-2">
+          <div class="col-12"><b>Motif </b></div>
+          <div class="col-12">
+            <p>{{ dossier.motif[0] }}</p>
+          </div>
+        </div>
+        <!--              Histoire              -->
+        <div class="row mt-2">
+          <div class="col-12"><b>Histoire </b></div>
+          <div class="col-12">
+            <p>{{ dossier.histoire }}</p>
+          </div>
+        </div>
+        <!--              Terrain              -->
+        <div class="row mt-2">
+          <div class="col-12"><b>Terrain </b></div>
+          <div class="col-12">
+            <p>{{ dossier.terrain[0] }}</p>
+          </div>
+        </div>
+        <!--              Medecin              -->
+        <div class="row mt-2" *ngIf="dossier.Personnel">
+          <div class="col-12"><b>Medecin </b></div>
+          <div class="col-6">Nom</div>
+          <div class="col-6">
+            {{ dossier.Personnel.nom }}
+          </div>
+          <div class="col-6">Prenom</div>
+          <div class="col-6">
+            {{ dossier.Personnel.prenom }}
+          </div>
+          <div class="col-6">Telephone</div>
+          <div class="col-6">
+            {{ dossier.Personnel.telephone }}
+          </div>
+          <div class="col-6">Specialisation</div>
+          <div class="col-6">
+            {{ dossier.Personnel.specialisation }}
+          </div>
+        </div>
+        <!--              Salle              -->
+        <div
+          class="row mt-2"
+          *ngIf="dossier.Salle && dossier.Salle.TypeDeSalle"
+        >
+          <div class="col-12"><b>Salle </b></div>
+
+          <div class="col-6">Numero salle</div>
+          <div class="col-6">{{ dossier.Salle.numero }}</div>
+
+          <div class="col-6">Type de salle</div>
+          <div class="col-6">{{ dossier.Salle.TypeDeSalle.type }}</div>
+
+          <div class="col-6">Nombre de Place</div>
+          <div class="col-6">{{ dossier.Salle.place }}</div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+</div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, tap, map } from 'rxjs';
 import { Patient } from 'src/app/core/models/Models';
 import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
 import { RoutesNames } from 'src/app/core/routes/routes.config';
@@ -18,7 +18,7 @@ export class PatientsDetailsComponent {
   notification: string[] = [];
   errorMessage: string[] = [];
 
-  panelOpenState = false ;
+  panelOpenState = false;
 
   constructor(
     private store: Store<AppState>,
@@ -29,6 +29,14 @@ export class PatientsDetailsComponent {
       this.store.select(this.patientsSelectors.getEntitieById())
     );
 
+    //Pour id du patien dans le local
+    this.store.select(this.patientsSelectors.getEntitieById()).subscribe({
+      next: (data) => {
+        if (data?.id) {
+          localStorage.setItem('idPatient', data.id);
+        }
+      },
+    });
     //
     this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
     this.store.select(this.patientsSelectors.getNotification()).subscribe({
