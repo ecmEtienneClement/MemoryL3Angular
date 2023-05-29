@@ -18,6 +18,9 @@ export interface Antecedent extends I {
   chirugicaux: string[];
   familiaire: string[];
   autre: string[];
+  dossierPatient: string;
+  personnel: string;
+  Personnel?: Personnel;
 }
 //TODO
 export interface CompteBloque extends I {
@@ -33,6 +36,9 @@ export interface Consultation extends I {
   temperature: string;
   frequenceCardiaque: string;
   pressionArterielle: string;
+  dossierPatient: string;
+  personnel: string;
+  Personnel?: Personnel;
 }
 //TODO
 export interface DossierPatient extends I {
@@ -40,6 +46,16 @@ export interface DossierPatient extends I {
   motif: string[];
   histoire: string[];
   terrain: string[];
+  personnel: string[];
+  salle: string;
+  patient: string;
+  Salle?: Salle;
+  Personnel?: Personnel;
+  Payements?: Payement[];
+  Ordonnances?: Ordonnance[];
+  RendezVous?: RendezVous[];
+  Antecedent?: Antecedent;
+  Consultations?: Consultation[];
 }
 
 //TODO
@@ -64,12 +80,17 @@ export interface Message extends I {
 //TODO
 export interface Ordonnance extends I {
   tbOrdonnance: string[];
+  dossierPatient: string;
+  DossierPatient?: DossierPatient;
+  personnel: string;
+  Personnel?: Personnel;
 }
 //TODO
 export interface Patient extends J {
   dateDeNaissance: string;
   proffession: string;
   groupeSanguin: GrpSanguin;
+  DossierPatients?: DossierPatient;
 }
 export enum Sexe {
   M = 'M',
@@ -87,6 +108,11 @@ export enum GrpSanguin {
 export interface Payement extends I {
   description: string;
   montant: number;
+  Personnel?: Personnel;
+  secretaire: string;
+  dossierPatient: string;
+  DossierPatient?: DossierPatient;
+  Poste?: Poste;
 }
 //TODO
 export interface Personnel extends J {
@@ -106,9 +132,17 @@ export interface Poste extends I {
 export interface RendezVous extends I {
   motif: string;
   date: string;
+  Personnel?: Personnel;
+  personnel: string;
+  dossierPatient: string;
+  DossierPatient?: DossierPatient;
+  TypeRendezVou?: TypeRendezVous;
+  typeRendezVous: string;
+  secretaire:string;
 }
 //TODO
 export interface Salle extends I {
+  TypeDeSalle?: TypeDeSalle;
   typeDeSalle: string;
   numero: number;
   place: number;

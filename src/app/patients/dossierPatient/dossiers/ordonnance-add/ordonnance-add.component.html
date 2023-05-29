@@ -1,0 +1,72 @@
+<div class="container">
+  <a
+    class="aa"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDossierDetails
+    }}/{{ idDossier }}"
+  >
+    Retour</a
+  >
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <h1>Ajouter Ordonnance</h1>
+
+  <form
+    [formGroup]="formOrdonnance"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <div class="row g-3">
+      <!--                            tbOrdonnance                           -->
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Ordonnance</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="tbOrdonnance"
+            placeholder="L'ordonnance ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <!--                            PERSONNEL                           -->
+      <div class="col form-group" *ngIf="personnels$ | async as personnel">
+        <mat-form-field appearance="outline">
+          <mat-label>Personnels</mat-label>
+          <mat-select formControlName="personnel">
+            <mat-option *ngFor="let per of personnel" [value]="per.id"
+              >{{ per.prenom }} - {{ per.nom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="card mt-2" *ngIf="formOrdonnance$ | async as form">
+      <div class="card-body">
+        <div class="row mt-2">
+          <div class="col-12">
+            <h5 class="card-title">Ordonnance</h5>
+            <p class="card-text">{{ form.tbOrdonnance }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

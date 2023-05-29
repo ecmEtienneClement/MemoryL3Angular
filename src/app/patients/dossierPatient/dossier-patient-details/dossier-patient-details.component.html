@@ -1,0 +1,617 @@
+<div class="container">
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <div class="row">
+    <div class="col-12">
+      <a
+        class="aa"
+        routerLink="/{{ routesName.mPatient.patients }}/{{
+          routesName.mPatient.patientsDossier
+        }}/{{ idPatient }}"
+      >
+        Retour</a
+      >
+    </div>
+  </div>
+
+  <mat-tab-group
+    *ngIf="dossierPatient$ | async as dossier"
+    mat-stretch-tabs
+    class="mt-3 example-stretched-tabs mat-elevation-z4"
+  >
+    <mat-tab label="Consultation(s)">
+      <div class="row mt-2">
+        <div class="col-12">
+          <a
+            class="aa"
+            routerLink="/{{ routesName.mPatient.patients }}/{{
+              routesName.mPatient.patientsConsultationAdd
+            }}"
+          >
+            Ajouter Consultation</a
+          >
+        </div>
+      </div>
+      <div class="mt-2 container-fluid">
+        <!--                                                         -->
+        <mat-accordion *ngFor="let consult of consultations">
+          <mat-expansion-panel
+            class="mt-2"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <a
+                  class="aa"
+                  routerLink="/{{ routesName.mPatient.patients }}/{{
+                    routesName.mPatient.patientsConsultationUpd
+                  }}/{{ consult.id }}/{{ dossier.id }}"
+                >
+                  Modifier</a
+                >
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="col-12">
+                  Date de creation :
+                  {{ consult.createdAt | date : "shortDate" }}
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="card">
+              <div class="card-body">
+                <!--              DELETE              -->
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <button
+                      (click)="deleteConsultation(consult)"
+                      type="button"
+                      class="btndel btn btn-sm btn-outline-danger"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+                <!--              DATE              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Date </b></div>
+
+                  <div class="col-6">Dernier modification</div>
+                  <div class="col-6">
+                    {{ consult.updatedAt | date : "shortDate" }}
+                  </div>
+                </div>
+
+                <!--              Poids              -->
+                <div class="row mt-2">
+                  <div class="col-6"><b>Poids </b></div>
+                  <div class="col-6">
+                    <p>{{ consult.poids }} Kg</p>
+                  </div>
+                </div>
+                <!--              Taille              -->
+                <div class="row mt-2">
+                  <div class="col-6"><b>Taille </b></div>
+                  <div class="col-6">
+                    <p>{{ consult.taille }} Cm</p>
+                  </div>
+                </div>
+                <!--              Temperature              -->
+                <div class="row mt-2">
+                  <div class="col-6"><b>Temperature </b></div>
+                  <div class="col-6">
+                    <p>{{ consult.temperature }}</p>
+                  </div>
+                </div>
+                <!--              Frequence Cardiaque              -->
+                <div class="row mt-2">
+                  <div class="col-6"><b>Frequence Cardiaque </b></div>
+                  <div class="col-6">
+                    <p>{{ consult.frequenceCardiaque }}</p>
+                  </div>
+                </div>
+                <!--              Pression Arterielle              -->
+                <div class="row mt-2">
+                  <div class="col-6"><b>Pression Arterielle </b></div>
+                  <div class="col-6">
+                    <p>{{ consult.pressionArterielle }}</p>
+                  </div>
+                </div>
+                <!--              Diagnosti Medical             -->
+                <div class="row mt-2">
+                  <div class="col-6"><b>IMC </b></div>
+                  <div class="col-6">
+                    <p>{{ consult.imc }}</p>
+                  </div>
+                </div>
+                <!--              Diagnosti Medical             -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Diagnosti Medical </b></div>
+                  <div class="col-12">
+                    <p>{{ consult.diagnostiqueMedical }}</p>
+                  </div>
+                </div>
+                <!--              Medecin              -->
+                <div class="row mt-2" *ngIf="consult.Personnel">
+                  <div class="col-12"><b>Medecin / Infirmier</b></div>
+                  <div class="col-6">Nom</div>
+                  <div class="col-6">
+                    ec;etiennem
+                    {{ consult.Personnel.nom }}
+                  </div>
+                  <div class="col-6">Prenom</div>
+                  <div class="col-6">
+                    {{ consult.Personnel.prenom }}
+                  </div>
+                  <div class="col-6">Telephone</div>
+                  <div class="col-6">
+                    {{ consult.Personnel.telephone }}
+                  </div>
+                  <div class="col-6">Specialisation</div>
+                  <div class="col-6">
+                    {{ consult.Personnel.specialisation }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+    <mat-tab label="Antecedent(s)">
+      <div class="row mt-2">
+        <div class="col-12">
+          <a
+            class="aa"
+            routerLink="/{{ routesName.mPatient.patients }}/{{
+              routesName.mPatient.patientsAntecedentAdd
+            }}"
+          >
+            Ajouter Antecedent</a
+          >
+        </div>
+      </div>
+      <div class="mt-2 container-fluid">
+        <!--                                                         -->
+        <mat-accordion *ngFor="let antece of antecedents">
+          <mat-expansion-panel
+            class="mt-2"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <a
+                  class="aa"
+                  routerLink="/{{ routesName.mPatient.patients }}/{{
+                    routesName.mPatient.patientsAntecedentUpd
+                  }}/{{ antece.id }}/{{ dossier.id }}"
+                >
+                  Modifier</a
+                >
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="col-12">
+                  Date de création :
+                  {{ antece.createdAt | date : "shortDate" }}
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="card">
+              <div class="card-body">
+                <!--              DELETE              -->
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <button
+                      (click)="deleteAntecedent(antece)"
+                      type="button"
+                      class="btndel btn btn-sm btn-outline-danger"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+                <!--              DATE              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Date </b></div>
+
+                  <div class="col-6">Dernier modification</div>
+                  <div class="col-6">
+                    {{ antece.updatedAt | date : "shortDate" }}
+                  </div>
+                </div>
+
+                <!--              Allergie              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Allergie </b></div>
+                  <div class="col-12">
+                    <p>{{ antece.allergie }}</p>
+                  </div>
+                </div>
+                <!--              Medicaux              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Medicaux </b></div>
+                  <div class="col-12">
+                    <p>{{ antece.medicaux }}</p>
+                  </div>
+                </div>
+                <!--              Chirugicaux              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Chirugicaux </b></div>
+                  <div class="col-12">
+                    <p>{{ antece.chirugicaux }}</p>
+                  </div>
+                </div>
+                <!--              Familiaire              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Familiaire </b></div>
+                  <div class="col-12">
+                    <p>{{ antece.familiaire }}</p>
+                  </div>
+                </div>
+                <!--              Autres              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Autres </b></div>
+                  <div class="col-12">
+                    <p>{{ antece.autre }}</p>
+                  </div>
+                </div>
+
+                <!--              Medecin              -->
+                <div class="row mt-2" *ngIf="antece.Personnel">
+                  <div class="col-12"><b>Medecin / Infirmier</b></div>
+                  <div class="col-6">Nom</div>
+                  <div class="col-6">
+                    {{ antece.Personnel.nom }}
+                  </div>
+                  <div class="col-6">Prenom</div>
+                  <div class="col-6">
+                    {{ antece.Personnel.prenom }}
+                  </div>
+                  <div class="col-6">Telephone</div>
+                  <div class="col-6">
+                    {{ antece.Personnel.telephone }}
+                  </div>
+                  <div class="col-6">Specialisation</div>
+                  <div class="col-6">
+                    {{ antece.Personnel.specialisation }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+    <mat-tab label="Ordonnance(s)">
+      <div class="row mt-2">
+        <div class="col-12">
+          <a
+            class="aa"
+            routerLink="/{{ routesName.mPatient.patients }}/{{
+              routesName.mPatient.patientsOrdonnanceAdd
+            }}"
+          >
+            Ajouter Ordonnance</a
+          >
+        </div>
+      </div>
+      <div class="mt-2 container-fluid">
+        <!--                                                         -->
+        <mat-accordion *ngFor="let ordon of ordonnances">
+          <mat-expansion-panel
+            class="mt-2"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <a
+                  class="aa"
+                  routerLink="/{{ routesName.mPatient.patients }}/{{
+                    routesName.mPatient.patientsOrdonnanceUpd
+                  }}/{{ ordon.id }}/{{ dossier.id }}"
+                >
+                  Modifier</a
+                >
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="col-12">
+                  Date de création :
+                  {{ ordon.createdAt | date : "shortDate" }}
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="card">
+              <div class="card-body">
+                <!--              DELETE              -->
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <button
+                      (click)="deleteOrdonnance(ordon)"
+                      type="button"
+                      class="btndel btn btn-sm btn-outline-danger"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+                <!--              DATE              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Date </b></div>
+
+                  <div class="col-6">Dernier modification</div>
+                  <div class="col-6">
+                    {{ ordon.updatedAt | date : "shortDate" }}
+                  </div>
+                </div>
+
+                <!--              Ordonnance              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Ordonnance </b></div>
+                  <div class="col-12">
+                    <p>{{ ordon.tbOrdonnance }}</p>
+                  </div>
+                </div>
+
+                <!--              Medecin              -->
+                <div class="row mt-2" *ngIf="ordon.Personnel">
+                  <div class="col-12"><b>Medecin / Infirmier</b></div>
+                  <div class="col-6">Nom</div>
+                  <div class="col-6">
+                    {{ ordon.Personnel.nom }}
+                  </div>
+                  <div class="col-6">Prenom</div>
+                  <div class="col-6">
+                    {{ ordon.Personnel.prenom }}
+                  </div>
+                  <div class="col-6">Telephone</div>
+                  <div class="col-6">
+                    {{ ordon.Personnel.telephone }}
+                  </div>
+                  <div class="col-6">Specialisation</div>
+                  <div class="col-6">
+                    {{ ordon.Personnel.specialisation }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+    <mat-tab label="Rendez-Vous(s)">
+      <div class="row mt-2">
+        <div class="col-12">
+          <a
+            class="aa"
+            routerLink="/{{ routesName.mPatient.patients }}/{{
+              routesName.mPatient.patientsRendezVousAdd
+            }}"
+          >
+            Ajouter Rendez-Vous</a
+          >
+        </div>
+      </div>
+      <div class="mt-2 container-fluid">
+        <!--                                                         -->
+        <mat-accordion *ngFor="let rv of rendezVous">
+          <mat-expansion-panel
+            class="mt-2"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <a
+                  class="aa"
+                  routerLink="/{{ routesName.mPatient.patients }}/{{
+                    routesName.mPatient.patientsRendezVousUpd
+                  }}/{{ rv.id }}/{{ dossier.id }}"
+                >
+                  Modifier</a
+                >
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="col-12">
+                  Date de création :
+                  {{ rv.createdAt | date : "shortDate" }}
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="card">
+              <div class="card-body">
+                <!--              DELETE              -->
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <button
+                      (click)="deleteRv(rv)"
+                      type="button"
+                      class="btndel btn btn-sm btn-outline-danger"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+                <!--              DATE              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Date </b></div>
+
+                  <div class="col-6">Dernier modification</div>
+                  <div class="col-6">
+                    {{ rv.updatedAt | date : "shortDate" }}
+                  </div>
+                </div>
+
+                <!--              motif              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Motif </b></div>
+                  <div class="col-12">
+                    <p>{{ rv.motif }}</p>
+                  </div>
+                </div>
+                <!--              date              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Date </b></div>
+                  <div class="col-12">
+                    <p>{{ rv.date }}</p>
+                  </div>
+                </div>
+                <!--              TypeRendezVous              -->
+                <div class="row mt-2" *ngIf="rv.TypeRendezVou">
+                  <div class="col-12"><b>Type de rendez-vous</b></div>
+                  <div class="col-6">Type</div>
+                  <div class="col-6">
+                    {{ rv.TypeRendezVou.type }}
+                  </div>
+                  <div class="col-6">Prix</div>
+                  <div class="col-6">
+                    {{ rv.TypeRendezVou.prix }}
+                  </div>
+                </div>
+                <!--              Medecin              -->
+                <div class="row mt-2" *ngIf="rv.Personnel">
+                  <div class="col-12"><b>Medecin</b></div>
+                  <div class="col-6">Nom</div>
+                  <div class="col-6">
+                    {{ rv.Personnel.nom }}
+                  </div>
+                  <div class="col-6">Prenom</div>
+                  <div class="col-6">
+                    {{ rv.Personnel.prenom }}
+                  </div>
+                  <div class="col-6">Telephone</div>
+                  <div class="col-6">
+                    {{ rv.Personnel.telephone }}
+                  </div>
+
+                  <div class="col-6">Specialisation</div>
+                  <div class="col-6">
+                    {{ rv.Personnel.specialisation }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+    <mat-tab label="Payement(s)">
+      <div class="row mt-2">
+        <div class="col-12">
+          <a
+            class="aa"
+            routerLink="/{{ routesName.mPatient.patients }}/{{
+              routesName.mPatient.patientsPayementAdd
+            }}"
+          >
+            Ajouter Payement</a
+          >
+        </div>
+      </div>
+      <div class="mt-2 container-fluid">
+        <!--                                                         -->
+        <mat-accordion *ngFor="let paye of payements">
+          <mat-expansion-panel
+            class="mt-2"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <a
+                  class="aa"
+                  routerLink="/{{ routesName.mPatient.patients }}/{{
+                    routesName.mPatient.patientsPayementUpd
+                  }}/{{ paye.id }}/{{ dossier.id }}"
+                >
+                  Modifier</a
+                >
+              </mat-panel-title>
+              <mat-panel-description>
+                <div class="col-12">
+                  Date de création :
+                  {{ paye.createdAt | date : "shortDate" }}
+                </div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="card">
+              <div class="card-body">
+                <!--              DELETE              -->
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <button
+                      (click)="deletePayement(paye)"
+                      type="button"
+                      class="btndel btn btn-sm btn-outline-danger"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+                <!--              DATE              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Date </b></div>
+
+                  <div class="col-6">Dernier modification</div>
+                  <div class="col-6">
+                    {{ paye.updatedAt | date : "shortDate" }}
+                  </div>
+                </div>
+                <!--              Montant              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Montant </b></div>
+                  <div class="col-12">
+                    <p>{{ paye.montant }}</p>
+                  </div>
+                </div>
+                <!--              Description              -->
+                <div class="row mt-2">
+                  <div class="col-12"><b>Description </b></div>
+                  <div class="col-12">
+                    <p>{{ paye.description }}</p>
+                  </div>
+                </div>
+
+                <!--              Secretaire              -->
+                <div class="row mt-2" *ngIf="paye.Personnel">
+                  <div class="col-12"><b>Secretaire</b></div>
+                  <div class="col-6">Nom</div>
+                  <div class="col-6">
+                    {{ paye.Personnel.nom }}
+                  </div>
+                  <div class="col-6">Prenom</div>
+                  <div class="col-6">
+                    {{ paye.Personnel.prenom }}
+                  </div>
+                  <div class="col-6">Telephone</div>
+                  <div class="col-6">
+                    {{ paye.Personnel.telephone }}
+                  </div>
+
+                  <div class="col-6">Specialisation</div>
+                  <div class="col-6">
+                    {{ paye.Personnel.specialisation }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div></mat-tab
+    >
+  </mat-tab-group>
+</div>

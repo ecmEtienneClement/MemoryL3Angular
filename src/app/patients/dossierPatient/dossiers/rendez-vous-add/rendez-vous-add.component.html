@@ -1,0 +1,100 @@
+<div class="container">
+  <a
+    class="aa"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsDossierDetails
+    }}/{{ idDossier }}"
+  >
+    Retour</a
+  >
+
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <h1>Ajouter Rendez-vous</h1>
+
+  <form
+    [formGroup]="formRendezVous"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <div class="row g-3">
+      <!--                            TYPE                           -->
+      <div class="col form-group" *ngIf="typeRv$ | async as type">
+        <mat-form-field appearance="outline">
+          <mat-label>Types de rendez-vous</mat-label>
+          <mat-select formControlName="typeRendezVous">
+            <mat-option *ngFor="let typ of type" [value]="typ.id"
+              >{{ typ.type }} - {{ typ.prix }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--                            PERSONNEL                           -->
+      <div class="col form-group" *ngIf="personnels$ | async as personnel">
+        <mat-form-field appearance="outline">
+          <mat-label>Personnels</mat-label>
+          <mat-select formControlName="personnel">
+            <mat-option *ngFor="let per of personnel" [value]="per.id"
+              >{{ per.prenom }} - {{ per.nom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <!--                            motif                           -->
+    <div class="row g-3">
+      <div class="col frm-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Motif</mat-label>
+          <textarea
+            rows="4"
+            matInput
+            formControlName="motif"
+            placeholder="La description ici..."
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <!--                            date                           -->
+      <div class="col frm-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Choisir une date</mat-label>
+          <input formControlName="date" matInput [matDatepicker]="picker" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="card mt-2" *ngIf="formRendezVous$ | async as form">
+      <div class="card-body">
+        <div class="row mt-2">
+          <div class="col-12">
+            <h5 class="card-title">Motif</h5>
+            <p class="card-text">{{ form.motif }}</p>
+          </div>
+          <div class="col-12">
+            <h5 class="card-title">Date</h5>
+            <p class="card-text">{{ form.date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
@@ -106,4 +107,16 @@ export class PatientsAddComponent implements OnInit {
       ]);
     }
   }
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    // Only highligh dates inside the month view.
+    if (view === 'month') {
+      const date = cellDate.getDate();
+
+      // Highlight the 1st and 20th day of each month.
+      return date === 1 || date === 20 ? 'example-custom-date-class' : '';
+    }
+
+    return '';
+  };
 }

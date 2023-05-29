@@ -17,6 +17,17 @@ export class RoutesNames {
     patientsDossier: 'patientsDossier',
     patientsDossierAdd: 'patientsDossierAdd',
     patientsDossierUpd: 'patientsDossierUpd',
+    patientsDossierDetails: 'patientsDossierDetails',
+    patientsConsultationAdd: 'patientsConsultationAdd',
+    patientsConsultationUpd: 'patientsConsultationUpd',
+    patientsOrdonnanceAdd: 'patientsOrdonnanceAdd',
+    patientsOrdonnanceUpd: 'patientsOrdonnanceUpd',
+    patientsAntecedentAdd: 'patientsAntecedentAdd',
+    patientsAntecedentUpd: 'patientsAntecedentUpd',
+    patientsPayementAdd: 'patientsPayementAdd',
+    patientsPayementUpd: 'patientsPayementUpd',
+    patientsRendezVousAdd: 'patientsRendezVousAdd',
+    patientsRendezVousUpd: 'patientsRendezVousUpd',
   };
 
   //Route pour le module config
