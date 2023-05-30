@@ -1,72 +1,3 @@
-<!-- <div class="container">
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                routerLink="{{ routesName.mPersonnel.personnels }}"
-                routerLinkActive="router-link-active"
-                >Personnels</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                routerLink="{{ routesName.mConfig.config }}"
-                routerLinkActive="router-link-active"
-                >Config</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                routerLink="{{ routesName.mPatient.patients }}"
-                routerLinkActive="router-link-active"
-                >Patient</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Disabled</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <body>
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
-    </div>
-  </body>
-</div> -->
-
-<!-- sidebare -->
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
@@ -83,7 +14,13 @@
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mPatient.patients }}"
-        ><mat-icon>personal_injury</mat-icon>Patient</a
+        ><mat-icon>personal_injury</mat-icon>Patients</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="{{ routesName.mPatient.patientsAdd }}"
+        ><mat-icon>add</mat-icon>Ajouter Patient</a
       >
       <a
         mat-list-item
@@ -95,16 +32,29 @@
       <a
         mat-list-item
         routerLinkActive="active"
-        routerLink="{{ routesName.mConfig.config }}"
-        ><mat-icon>settings</mat-icon>Config</a
+        routerLink="{{ routesName.mPersonnel.personnelsAdd }}"
+        ><mat-icon>add</mat-icon>Ajouter Personnel</a
+      >
+
+      <a
+        routerLink="{{ routesName.mPatient.patientsTaches }}"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        <mat-icon>bookmark_border</mat-icon>Tâches</a
       >
       <a
-        class="nav-link disabled"
-        href="#"
-        tabindex="-1"
-        aria-activity="true"
-        aria-activity="true"
-        >Activity</a
+        routerLink="{{ routesName.mPatient.patientsTachesAdd }}"
+        mat-list-item
+        routerLinkActive="active"
+      >
+        <mat-icon>add</mat-icon>Ajouter Tâche</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="{{ routesName.mConfig.config }}"
+        ><mat-icon>settings</mat-icon>Configurations</a
       >
     </mat-nav-list>
   </mat-sidenav>
@@ -119,18 +69,13 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <!-- <a routerLink="" class="dashboard"
-        ><span class="btn">
-          <mat-icon>home</mat-icon>Dashboard</span
-        ></a
-      > -->
+
       <a routerLink="" class="dashboard">
         <i><img src="../../assets/img/md-4.gif" class="img" /></i>
       </a>
     </mat-toolbar>
 
     <div class="container-fluid">
-      
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

@@ -1,70 +1,68 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Personnel } from 'src/app/core/models/Models';
+import { Tache } from 'src/app/core/models/Models';
 import { StateApp } from 'src/app/core/ngrx/Entities.state';
 import { RoutesNames } from 'src/app/core/routes/routes.config';
-import { PersonnelsActions, PersonnelsSelectors } from './ngrx/Personnels.ngrx';
-
+import { TachesActions, TachesSelectors } from '../ngrx/ngrxTache/Tache.ngrx';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 @Component({
-  selector: 'app-personnels',
-  templateUrl: './personnels.component.html',
-  styleUrls: ['./personnels.component.scss'],
+  selector: 'app-taches',
+  templateUrl: './taches.component.html',
+  styleUrls: ['./taches.component.scss'],
 })
-export class PersonnelsComponent implements OnInit {
-  personnels$: Observable<Personnel[]> = new Observable<Personnel[]>();
-  stateApp$: Observable<StateApp> = new Observable<StateApp>();
+export class TachesComponent implements OnInit, AfterViewInit {
+  tache: Observable<Tache[]> = new Observable<Tache[]>();
   readonly routesName = RoutesNames;
+  stateApp$: Observable<StateApp> = new Observable<StateApp>();
   notification: string[] = [];
   errorMessage: string[] = [];
-
   displayedColumns: string[] = [
-    'Nom',
-    'Prenon',
-    'Age',
-    'Sexe',
-    'Telephone',
+    'Numero',
+    'Date',
+    'perfusion',
+    'prelevement',
+    'prisMedicament',
     ' ',
     '  ',
   ];
-  dataSource!: MatTableDataSource<Personnel>;
+  dataSource!: MatTableDataSource<Tache>;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private store: Store,
-    private personnelsActions: PersonnelsActions,
-    private personnelsSelectors: PersonnelsSelectors
+    private tacheActions: TachesActions,
+    private tacheSelectors: TachesSelectors
   ) {}
   ngOnInit(): void {
-    this.store.dispatch(this.personnelsActions.getAllEntities()());
-    this.store.select(this.personnelsSelectors.getEntities()).subscribe({
+    this.store.dispatch(this.tacheActions.getAllEntities()());
+    this.store.select(this.tacheSelectors.getEntities()).subscribe({
       next: (data) => {
         // Assign the data to the data source for the table to render
         this.dataSource = new MatTableDataSource(data);
       },
     });
+
     //
-    this.stateApp$ = this.store.select(this.personnelsSelectors.getStateApp());
-    this.store.select(this.personnelsSelectors.getNotification()).subscribe({
+    this.stateApp$ = this.store.select(this.tacheSelectors.getStateApp());
+    this.store.select(this.tacheSelectors.getNotification()).subscribe({
       next: (data) => (this.notification = data),
     });
-    this.store.select(this.personnelsSelectors.getError()).subscribe({
+    this.store.select(this.tacheSelectors.getError()).subscribe({
       next: (data) => (this.errorMessage = data),
     });
   }
-
   //
-  deletePersonnel(personnel: Personnel) {
-    this.store.dispatch(
-      this.personnelsActions.delEntitie()({ entitie: personnel })
-    );
+  deleteTache(tache: Tache) {
+    this.store.dispatch(this.tacheActions.delEntitie()({ entitie: tache }));
   }
-
   //
   ngAfterViewInit() {
+  
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -78,3 +76,5 @@ export class PersonnelsComponent implements OnInit {
     }
   }
 }
+
+/** Builds and returns a new User. */

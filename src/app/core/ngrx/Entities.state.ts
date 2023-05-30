@@ -44,6 +44,7 @@ export enum EntitiesNameAPI {
   salle = '[salle / API] ',
   typeDeSalle = '[typeDeSalle / API] ',
   typeDeRV = '[typeDeRV / API] ',
+  tache = '[tache / API] ',
   infoClini = '[infoClini / API] ',
   dossierPatient = '[dossierPatient / API] ',
   consultation = '[consultation / API] ',

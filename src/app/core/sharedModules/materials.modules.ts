@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   exports: [
     MatFormFieldModule,
@@ -37,6 +38,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatPaginatorModule,
   ],
 })
 export class AngularMateriels {}

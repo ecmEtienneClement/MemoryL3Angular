@@ -138,7 +138,7 @@ export interface RendezVous extends I {
   DossierPatient?: DossierPatient;
   TypeRendezVou?: TypeRendezVous;
   typeRendezVous: string;
-  secretaire:string;
+  secretaire: string;
 }
 //TODO
 export interface Salle extends I {
@@ -150,10 +150,12 @@ export interface Salle extends I {
 //TODO
 export interface Tache extends I {
   perfusion: string[];
-  injection: string[];
-  pansement: string[];
   prelevement: string[];
   prisMedicament: string[];
+  injection?: string[];
+  pansement?: string[];
+  infirmier: string;
+  Personnel?: Personnel;
 }
 //TODO
 export interface TypeDeSalle extends I {

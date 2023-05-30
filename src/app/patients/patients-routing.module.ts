@@ -19,10 +19,22 @@ import { OrdonnanceUpdComponent } from './dossierPatient/dossiers/ordonnance-upd
 import { RendezVousUpdComponent } from './dossierPatient/dossiers/rendez-vous-upd/rendez-vous-upd.component';
 import { AntecedentUpdComponent } from './dossierPatient/dossiers/antecedent-upd/antecedent-upd.component';
 import { PayementUpdComponent } from './dossierPatient/dossiers/payement-upd/payement-upd.component';
+import { TachesComponent } from './taches/taches.component';
+import { TachesAddComponent } from './taches-add/taches-add.component';
+import { TachesDetailsComponent } from './taches-details/taches-details.component';
 
 const routes: Routes = [
   { path: '', component: PatientsComponent },
   { path: RoutesNames.mPatient.patientsAdd, component: PatientsAddComponent },
+  { path: RoutesNames.mPatient.patientsTaches, component: TachesComponent },
+  {
+    path: RoutesNames.mPatient.patientsTachesAdd,
+    component: TachesAddComponent,
+  },
+  {
+    path: `${RoutesNames.mPatient.patientsTachesDetails}/:id`,
+    component: TachesDetailsComponent,
+  },
   {
     path: `${RoutesNames.mPatient.patientsUpd}/:id`,
     component: PatientsUpdComponent,

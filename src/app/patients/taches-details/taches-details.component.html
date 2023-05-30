@@ -1,0 +1,238 @@
+<div class="container-fluid">
+  <!--                    LOADER STATE                    -->
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
+  <div class="col-12">
+    <a class="btnAct" routerLink="/{{ routesName.mPatient.patientsTaches }}">
+      Retour</a
+    >
+  </div>
+
+  <div *ngIf="tache.Personnel" class="jumbotron mt-2">
+    <div class="container">
+      <!-- <h1>Hello, world!</h1> -->
+      <div class="row mt-2">
+        <div class="ti col-8">
+          <mat-icon>personal_injury</mat-icon>
+          {{ tache.Personnel.prenom | uppercase }}
+          {{ tache.Personnel.nom | uppercase }}
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 blcTitre">Adresse</div>
+        <div class="col-6 blcVal">{{ tache.Personnel.adresse }}</div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 blcTitre">Sexe</div>
+        <div class="col-6 blcVal">{{ tache.Personnel.sexe }}</div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 blcTitre">Téléphone</div>
+        <div class="col-6 blcVal">
+          {{ tache.Personnel.telephone[0] ? tache.Personnel.telephone : "" }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--                    TABLE  PATIENTS                    -->
+  <h4>Patients a perfusés</h4>
+  <mat-form-field appearance="outline">
+    <mat-label>Filtre</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Ali"
+      #input
+    />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Nom Column -->
+      <ng-container class="mt-4" matColumnDef="Nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Nom</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.nom }}</td>
+      </ng-container>
+
+      <!-- Prenon Column -->
+      <ng-container matColumnDef="Prenon">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Prenon</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.prenom }}</td>
+      </ng-container>
+
+      <!-- Age Column -->
+      <ng-container matColumnDef="Age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Age</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.age }} Ans</td>
+      </ng-container>
+
+      <!-- Sexe Column -->
+      <ng-container matColumnDef="Sexe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Sexe</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.sexe }}</td>
+      </ng-container>
+
+      <!-- Telephone Column -->
+      <ng-container matColumnDef="Telephone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b> Télephone </b>
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.telephone }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Pas de patient(s) trouvés pour cette filtre "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
+
+  <!--                /////////////////////////////////////////////        -->
+
+  <!--                    TABLE  PATIENTS                    -->
+  <h4 class="mt-3">Patients a faire prélèvement</h4>
+  <mat-form-field appearance="outline">
+    <mat-label>Filtre</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Ali"
+      #input
+    />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSourcePrele" matSort>
+      <!-- Nom Column -->
+      <ng-container class="mt-4" matColumnDef="Nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Nom</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.nom }}</td>
+      </ng-container>
+
+      <!-- Prenon Column -->
+      <ng-container matColumnDef="Prenon">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Prenon</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.prenom }}</td>
+      </ng-container>
+
+      <!-- Age Column -->
+      <ng-container matColumnDef="Age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Age</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.age }} Ans</td>
+      </ng-container>
+
+      <!-- Sexe Column -->
+      <ng-container matColumnDef="Sexe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Sexe</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.sexe }}</td>
+      </ng-container>
+
+      <!-- Telephone Column -->
+      <ng-container matColumnDef="Telephone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b> Télephone </b>
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.telephone }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Pas de patient(s) trouvés pour cette filtre "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
+
+  <!--                /////////////////////////////////////////////        -->
+
+  <!--                    TABLE  PATIENTS                    -->
+  <h4 class="mt-3">Patients a prendre des médicaments</h4>
+  <mat-form-field appearance="outline">
+    <mat-label>Filtre</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Ali"
+      #input
+    />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSourcePrise" matSort>
+      <!-- Nom Column -->
+      <ng-container class="mt-4" matColumnDef="Nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Nom</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.nom }}</td>
+      </ng-container>
+
+      <!-- Prenon Column -->
+      <ng-container matColumnDef="Prenon">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Prenon</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.prenom }}</td>
+      </ng-container>
+
+      <!-- Age Column -->
+      <ng-container matColumnDef="Age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Age</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.age }} Ans</td>
+      </ng-container>
+
+      <!-- Sexe Column -->
+      <ng-container matColumnDef="Sexe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Sexe</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.sexe }}</td>
+      </ng-container>
+
+      <!-- Telephone Column -->
+      <ng-container matColumnDef="Telephone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b> Télephone </b>
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.telephone }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Pas de patient(s) trouvés pour cette filtre "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
+</div>
