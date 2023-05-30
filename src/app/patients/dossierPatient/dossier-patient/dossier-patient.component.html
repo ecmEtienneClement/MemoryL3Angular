@@ -1,5 +1,4 @@
 
-=======
 <div class="container">
   <!--                            PARTI LOADING             -->
 
@@ -10,7 +9,8 @@
       [errorMessage]="errorMessage"
     ></app-loading-cmp
   ></ng-container>
-  <a
+  <a 
+    mat-raised-button color="warn"
     routerLink="/{{ routesName.mPatient.patients }}/{{
       routesName.mPatient.patientsDetails
     }}/{{ id }}"
@@ -18,7 +18,7 @@
     Retour</a
   >
   <a
-    class="aa"
+    class="aa" mat-raised-button color="primary"
     routerLink="/{{ routesName.mPatient.patients }}/{{
       routesName.mPatient.patientsDossierAdd
     }}"
@@ -132,4 +132,4 @@
     </mat-accordion>
   </ng-container>
 </div>
->>>>>>> b4936ccf859cccb86dc88f4cb517a27a83d7afa5
+

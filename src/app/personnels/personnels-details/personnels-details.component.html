@@ -92,7 +92,7 @@
           </div>
           <div class="col-4">
             <a
-              class="aa"
+              class="aa" mat-stroked-button color="primary"
               routerLink="/{{ routesName.mPersonnel.personnels  }}/{{
                 routesName.mPatient.patientsDossier
               }}/{{ per.id }}"
@@ -150,11 +150,11 @@
         <mat-divider class="mt-2"></mat-divider>
         <div class="row">
           <div class="col-12">
-            <a class="btnAct" routerLink="/{{routesName.mPersonnel.personnels}}">
+            <a class="btnAct" routerLink="/{{routesName.mPersonnel.personnels}}" mat-button color="warn">
               Retour</a
             >
             <a
-              class="btnAct"
+              class="btnAct" mat-button color="success"
               routerLink="/{{  routesName.mPersonnel.personnels }}/{{
                 routesName.mPersonnel.personnelsUpd
               }}/{{ per.id }}"
