@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
+
   ],
   bootstrap: [AppComponent],
 })

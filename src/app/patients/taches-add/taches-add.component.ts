@@ -59,11 +59,11 @@ export class TachesAddComponent implements OnInit {
     );
     this.patient$ = this.store.select(this.patientsSelectors.getEntities());
     //
-    this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
-    this.store.select(this.patientsSelectors.getNotification()).subscribe({
+    this.stateApp$ = this.store.select(this.tachesSelectors.getStateApp());
+    this.store.select(this.tachesSelectors.getNotification()).subscribe({
       next: (data) => (this.notification = data),
     });
-    this.store.select(this.patientsSelectors.getError()).subscribe({
+    this.store.select(this.tachesSelectors.getError()).subscribe({
       next: (data) => (this.errorMessage = data),
     });
 
@@ -103,8 +103,7 @@ export class TachesAddComponent implements OnInit {
       data.nameAction == EntitiesActionsTypes.addEntitieSuccess
     ) {
       this.router.navigate([
-        `/${this.routesName.mPatient.patients}/${this.routesName.mPatient.patientsDossierDetails}/`,
-        this.idDossier,
+        `/${this.routesName.mPatient.patients}/${this.routesName.mPatient.patientsTaches}`,
       ]);
     }
   }

@@ -1,5 +1,21 @@
 //
 export class RoutesNames {
+  //Route pour le module Profil
+  public static mLogin = {
+    login: 'login',
+  };
+  //Route pour le module Profil
+  public static mProfil = {
+    profil: 'profil',
+  };
+  //Route pour le module personnel
+  public static mHome = {
+    home: 'home',
+    homeConsultation: 'homeConsultation',
+    homeRendezVous: 'homeRendezVous',
+    homeOrdonnance: 'homeOrdonnance',
+    homePayement: 'homePayement',
+  };
   //Route pour le module personnel
   public static mPersonnel = {
     personnels: 'personnels',

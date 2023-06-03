@@ -4,64 +4,62 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Patient } from 'src/app/core/models/Models';
-import { StateApp } from 'src/app/core/ngrx/Entities.state';
+import { Payement } from 'src/app/core/models/Models';
+import { AppState, StateApp } from 'src/app/core/ngrx/Entities.state';
 import { RoutesNames } from 'src/app/core/routes/routes.config';
-import { PatientsActions, PatientsSelectors } from './ngrx/Patients.ngrx';
+import {
+  PayementsActions,
+  PayementsSelectors,
+} from 'src/app/patients/ngrx/ngrxPayement/Payement.ngrx';
 
 @Component({
-  selector: 'app-patients',
-  templateUrl: './patients.component.html',
-  styleUrls: ['./patients.component.scss'],
+  selector: 'app-payement',
+  templateUrl: './payement.component.html',
+  styleUrls: ['./payement.component.scss'],
 })
-export class PatientsComponent implements OnInit {
-  patients: Observable<Patient[]> = new Observable<Patient[]>();
-  readonly routesName = RoutesNames;
+export class PayementComponent implements OnInit {
   stateApp$: Observable<StateApp> = new Observable<StateApp>();
   notification: string[] = [];
   errorMessage: string[] = [];
+  //
+  readonly routesName = RoutesNames;
 
   displayedColumns: string[] = [
-    'Nom',
-    'Prenon',
-    'Age',
-    'Sexe',
-    'Telephone',
-    ' ',
-    '  ',
+    'Montant',
+    'Secretaire',
+    'DossierPatient',
+    'Description',
   ];
-  dataSource!: MatTableDataSource<Patient>;
+
+  dataSource!: MatTableDataSource<Payement>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  //
   constructor(
-    private store: Store,
-    private patientsActions: PatientsActions,
-    private patientsSelectors: PatientsSelectors
+    private store: Store<AppState>,
+    private payementsActions: PayementsActions,
+    private payementsSelectors: PayementsSelectors
   ) {}
-  ngOnInit(): void {
-    this.store.dispatch(this.patientsActions.getAllEntities()());
-    this.store.select(this.patientsSelectors.getEntities()).subscribe({
+
+  //
+  ngOnInit() {
+    this.store.dispatch(this.payementsActions.getAllEntities()());
+
+    this.store.select(this.payementsSelectors.getEntities()).subscribe({
       next: (data) => {
         // Assign the data to the data source for the table to render
         this.dataSource = new MatTableDataSource(data);
       },
     });
-
     //
-    this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
-    this.store.select(this.patientsSelectors.getNotification()).subscribe({
+    this.stateApp$ = this.store.select(this.payementsSelectors.getStateApp());
+    this.store.select(this.payementsSelectors.getNotification()).subscribe({
       next: (data) => (this.notification = data),
     });
-    this.store.select(this.patientsSelectors.getError()).subscribe({
+    this.store.select(this.payementsSelectors.getError()).subscribe({
       next: (data) => (this.errorMessage = data),
     });
-  }
-
-  //
-  deletePatient(patient: Patient) {
-    this.store.dispatch(
-      this.patientsActions.delEntitie()({ entitie: patient })
-    );
   }
 
   //
