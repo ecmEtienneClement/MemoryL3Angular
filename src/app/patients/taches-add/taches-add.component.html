@@ -1,0 +1,82 @@
+<div class="container">
+  <a
+    class="aa" mat-raised-button color="warn"
+    routerLink="/{{ routesName.mPatient.patients }}/{{
+      routesName.mPatient.patientsTaches
+    }}"
+  >
+    Retour</a
+  >
+  <!--                            PARTI LOADING             -->
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp
+  ></ng-container>
+  <h1>Ajouter Taches</h1>
+
+  <form
+    [formGroup]="formTache"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <div class="row g-3">
+      <!--                            PERSONNEL                           -->
+      <div class="col form-group" *ngIf="personnels$ | async as pers">
+        <mat-form-field appearance="outline">
+          <mat-label>Infirmier / Aide soignant </mat-label>
+          <mat-select formControlName="personnel">
+            <mat-option *ngFor="let per of pers" [value]="per.id"
+              >{{ per.nom }} - {{ per.prenom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!--                            PERFUSIONS                           -->
+      <div class="col form-group" *ngIf="patient$ | async as pati">
+        <mat-form-field appearance="outline">
+          <mat-label>Perfusion </mat-label>
+          <mat-select formControlName="perfusion" multiple>
+            <mat-option *ngFor="let pat of pati" [value]="pat.id"
+              >{{ pat.nom }} - {{ pat.prenom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row g-3">
+      <!--                            PRELEVEMENTS                           -->
+      <div class="col form-group" *ngIf="patient$ | async as pati">
+        <mat-form-field multiple appearance="outline">
+          <mat-label>Prélèvement </mat-label>
+          <mat-select formControlName="prelevement" multiple>
+            <mat-option *ngFor="let pat of pati" [value]="pat.id"
+              >{{ pat.nom }} - {{ pat.prenom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--                            Prise de Medoc                           -->
+      <div class="col form-group" *ngIf="patient$ | async as pati">
+        <mat-form-field multiple appearance="outline">
+          <mat-label>Prise de médicaments </mat-label>
+          <mat-select formControlName="prisMedicament" multiple>
+            <mat-option *ngFor="let pat of pati" [value]="pat.id"
+              >{{ pat.nom }} - {{ pat.prenom }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div *ngIf="!formTache.invalid" class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

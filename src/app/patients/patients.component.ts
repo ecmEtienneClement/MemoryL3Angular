@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Patient } from 'src/app/core/models/Models';
@@ -17,7 +20,11 @@ export class PatientsComponent implements OnInit {
   stateApp$: Observable<StateApp> = new Observable<StateApp>();
   notification: string[] = [];
   errorMessage: string[] = [];
-
+ 
+  displayedColumns: string[] = ['Nom',	'Prenon',	'Age',	'Sexe',	'Telephone'	,' ','  '];
+    dataSource!: MatTableDataSource<Patient>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private store: Store,
     private patientsActions: PatientsActions,
@@ -25,7 +32,12 @@ export class PatientsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.store.dispatch(this.patientsActions.getAllEntities()());
-    this.patients = this.store.select(this.patientsSelectors.getEntities());
+    this.store.select(this.patientsSelectors.getEntities()).subscribe({
+      next: (data) => {
+        // Assign the data to the data source for the table to render
+        this.dataSource = new MatTableDataSource(data);
+      },
+    });
 
     //
     this.stateApp$ = this.store.select(this.patientsSelectors.getStateApp());
@@ -42,5 +54,20 @@ export class PatientsComponent implements OnInit {
     this.store.dispatch(
       this.patientsActions.delEntitie()({ entitie: patient })
     );
+  }
+
+  //
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

@@ -33,6 +33,10 @@ import { ConsultationUpdComponent } from './dossierPatient/dossiers/consultation
 import { OrdonnanceUpdComponent } from './dossierPatient/dossiers/ordonnance-upd/ordonnance-upd.component';
 import { PayementUpdComponent } from './dossierPatient/dossiers/payement-upd/payement-upd.component';
 import { RendezVousUpdComponent } from './dossierPatient/dossiers/rendez-vous-upd/rendez-vous-upd.component';
+import { TachesComponent } from './taches/taches.component';
+import { TacheModule } from './ngrx/ngrxTache/Tache.modules';
+import { TachesAddComponent } from './taches-add/taches-add.component';
+import { TachesDetailsComponent } from './taches-details/taches-details.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,9 @@ import { RendezVousUpdComponent } from './dossierPatient/dossiers/rendez-vous-up
     OrdonnanceUpdComponent,
     PayementUpdComponent,
     RendezVousUpdComponent,
+    TachesComponent,
+    TachesAddComponent,
+    TachesDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +77,7 @@ import { RendezVousUpdComponent } from './dossierPatient/dossiers/rendez-vous-up
     AntecedentModule,
     PayementModule,
     RendezVousModule,
+    TacheModule,
   ],
 })
 export class PatientsModule {}
