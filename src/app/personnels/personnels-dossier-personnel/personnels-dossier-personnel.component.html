@@ -1,0 +1,485 @@
+<!-- New  Tables  detail personnel de santé-->
+<ng-container *ngIf="personnel$ | async as per">
+  <div class="toolbar">
+    <div class="detail">
+  
+        <a
+      class="btnAct"
+      routerLink="/{{ routesName.mPersonnel.personnelsDetails }}/{{per.id}}"
+      mat-button
+      color="warn"
+    >
+      Retour</a
+    >
+    </div>
+   
+  </div>
+
+  <div class="card mt-3" *ngIf="per.DossierPatients">
+   
+    <div class="card-body">
+      <h5 class="card-title">Dossier(s) Patients(s)</h5>
+      <!--                                                         -->
+      <mat-accordion *ngFor="let dossier of per.DossierPatients">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Numero dossier : {{ dossier.numeroDossier }}
+            </mat-panel-title>
+            <mat-panel-description>
+              dossier(s) Patient(s)
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <!--              DATE              -->
+          <div class="row mt-2">
+            <div class="col-12"><b>Date </b></div>
+            <div class="col-6">Date de creation</div>
+            <div class="col-6">
+              {{ dossier.createdAt | date : "shortDate" }}
+            </div>
+
+            <div class="col-6">Dernier modification</div>
+            <div class="col-6">
+              {{ dossier.updatedAt | date : "shortDate" }}
+            </div>
+          </div>
+
+          <!--              MOTIF              -->
+          <div class="row mt-2">
+            <div class="col-12"><b>Motif </b></div>
+            <div class="col-12">
+              <p>{{ dossier.motif[0] }}</p>
+            </div>
+          </div>
+          <!--              Histoire              -->
+          <div class="row mt-2">
+            <div class="col-12"><b>Histoire </b></div>
+            <div class="col-12">
+              <p>{{ dossier.histoire }}</p>
+            </div>
+          </div>
+          <!--              Terrain              -->
+          <div class="row mt-2">
+            <div class="col-12"><b>Terrain </b></div>
+            <div class="col-12">
+              <p>{{ dossier.terrain[0] }}</p>
+            </div>
+          </div>
+
+          <!--              Salle              -->
+          <div
+            class="row mt-2"
+            *ngIf="dossier.Salle && dossier.Salle.TypeDeSalle"
+          >
+            <div class="col-12"><b>Salle </b></div>
+
+            <div class="col-6">Numero salle</div>
+            <div class="col-6">{{ dossier.Salle.numero }}</div>
+
+            <div class="col-6">Type de salle</div>
+            <div class="col-6">{{ dossier.Salle.TypeDeSalle.type }}</div>
+
+            <div class="col-6">Nombre de Place</div>
+            <div class="col-6">{{ dossier.Salle.place }}</div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Consultations</h5>
+      <mat-accordion *ngFor="let consult of per.Consultations">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>Consultations </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de creation :
+                {{ consult.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ consult.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+
+              <!--              Poids              -->
+              <div class="row mt-2">
+                <div class="col-6"><b>Poids </b></div>
+                <div class="col-6">
+                  <p>{{ consult.poids }} Kg</p>
+                </div>
+              </div>
+              <!--              Taille              -->
+              <div class="row mt-2">
+                <div class="col-6"><b>Taille </b></div>
+                <div class="col-6">
+                  <p>{{ consult.taille }} Cm</p>
+                </div>
+              </div>
+              <!--              Temperature              -->
+              <div class="row mt-2">
+                <div class="col-6"><b>Temperature </b></div>
+                <div class="col-6">
+                  <p>{{ consult.temperature }}</p>
+                </div>
+              </div>
+              <!--              Frequence Cardiaque              -->
+              <div class="row mt-2">
+                <div class="col-6"><b>Frequence Cardiaque </b></div>
+                <div class="col-6">
+                  <p>{{ consult.frequenceCardiaque }}</p>
+                </div>
+              </div>
+              <!--              Pression Arterielle              -->
+              <div class="row mt-2">
+                <div class="col-6"><b>Pression Arterielle </b></div>
+                <div class="col-6">
+                  <p>{{ consult.pressionArterielle }}</p>
+                </div>
+              </div>
+              <!--              Diagnosti Medical             -->
+              <div class="row mt-2">
+                <div class="col-6"><b>IMC </b></div>
+                <div class="col-6">
+                  <p>{{ consult.imc }}</p>
+                </div>
+              </div>
+              <!--              Diagnosti Medical             -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Diagnosti Medical </b></div>
+                <div class="col-12">
+                  <p>{{ consult.diagnostiqueMedical }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mt-3" *ngIf="per.Ordonnances">
+    <div class="card-body">
+      <h5 class="card-title">Ordonnances</h5>
+      <mat-accordion *ngFor="let ordon of per.Ordonnances">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>Ordonnances </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de création :
+                {{ ordon.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ ordon.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+
+              <!--              Ordonnance              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Ordonnance </b></div>
+                <div class="col-12">
+                  <p>{{ ordon.tbOrdonnance }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mt-3" *ngIf="per.RendezVous">
+    <div class="card-body">
+      <h5 class="card-title">Rendez-Vous</h5>
+      <!--                                                         -->
+      <mat-accordion *ngFor="let rv of per.RendezVous">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>Rendez-Vous </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de création :
+                {{ rv.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ rv.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+
+              <!--              motif              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Motif </b></div>
+                <div class="col-12">
+                  <p>{{ rv.motif }}</p>
+                </div>
+              </div>
+              <!--              date              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+                <div class="col-12">
+                  <p>{{ rv.date }}</p>
+                </div>
+              </div>
+              <!--              TypeRendezVous              -->
+              <div class="row mt-2" *ngIf="rv.TypeRendezVou">
+                <div class="col-12"><b>Type de rendez-vous</b></div>
+                <div class="col-6">Type</div>
+                <div class="col-6">
+                  {{ rv.TypeRendezVou.type }}
+                </div>
+                <div class="col-6">Prix</div>
+                <div class="col-6">{{ rv.TypeRendezVou.prix }} Fcfa</div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mt-3" *ngIf="per.Payements">
+    <div class="card-body">
+      <h5 class="card-title">Payement(s)</h5>
+
+      <!--                                                         -->
+      <mat-accordion *ngFor="let paye of per.Payements">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Payement(s) </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de création :
+                {{ paye.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ paye.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+              <!--              Montant              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Montant </b></div>
+                <div class="col-12">
+                  <p>{{ paye.montant }} Fcfa</p>
+                </div>
+              </div>
+              <!--              Description              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Description </b></div>
+                <div class="col-12">
+                  <p>{{ paye.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mt-3" *ngIf="per.Taches">
+    <div class="card-body">
+      <h5 class="card-title">Tâche(s)</h5>
+
+      <!--                                                         -->
+      <mat-accordion *ngFor="let tache of per.Taches">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Tâche(s) </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de création :
+                {{ tache.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ tache.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <!--              perfusés              -->
+                <div class="col-4"><b>Patient(s) a perfusés </b></div>
+                <!--              prelevé              -->
+                <div class="col-4"><b>Patient(s) a prelevé </b></div>
+                <!--              prise              -->
+                <div class="col-4"><b>Patient(s) prise de médicament </b></div>
+              </div>
+
+              <div class="row mt-2">
+                <!--              prelevé              -->
+                <div class="col-4">
+                  <p>{{ tache.perfusion.length }}</p>
+                </div>
+                <!--              prelevement              -->
+                <div class="col-4">
+                  <p>{{ tache.prelevement.length }}</p>
+                </div>
+                <!--              prise              -->
+                <div class="col-4">
+                  <p>{{ tache.prisMedicament.length }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mt-3" *ngIf="per.CompteBloques">
+    <div class="card-body">
+      <h5 class="card-title">Compte(s) Bloque(s)</h5>
+      <!--                                                         -->
+      <mat-accordion *ngFor="let cmp of per.CompteBloques">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Compte(s) Bloques(s) </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de création :
+                {{ cmp.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ cmp.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+              <!--              Compte              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Compte </b></div>
+                <div class="col-12">
+                  <p>{{ cmp }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="card mb-3 mt-3" *ngIf="per.Personnels">
+    <div class="card-body">
+      <h5 class="card-title">Personnel(s)</h5>
+      <!--                                                         -->
+      <mat-accordion *ngFor="let pers of per.Personnels">
+        <mat-expansion-panel
+          class="mt-2"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>Personnel(s) </mat-panel-title>
+            <mat-panel-description>
+              <div class="col-12">
+                Date de création :
+                {{ pers.createdAt | date : "shortDate" }}
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="card">
+            <div class="card-body">
+              <!--              DATE              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Date </b></div>
+                <div class="col-6">Dernier modification</div>
+                <div class="col-6">
+                  {{ pers.updatedAt | date : "shortDate" }}
+                </div>
+              </div>
+              <!--              Personnel              -->
+              <div class="row mt-2">
+                <div class="col-12"><b>Pers </b></div>
+                <div class="col-12">
+                  <p>{{ pers }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</ng-container>

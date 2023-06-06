@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
       next: (data) => {
         if (data) {
           localStorage.setItem('idProfil', data.id);
+          localStorage.setItem('email', data.email);
           localStorage.setItem('token', data.token);
           this.stateApp = StateApp.loaded;
           EntitiesEmit.emitLogin(true);

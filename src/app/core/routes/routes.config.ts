@@ -23,6 +23,7 @@ export class RoutesNames {
     personnelsAdd: 'personnelsAdd',
     personnelsUpd: 'personnelsUpd',
     personnelsDetails: 'personnelsDetails',
+    personnelsDossier: 'personnelsDossier',
   };
 
   //Route pour le module patient

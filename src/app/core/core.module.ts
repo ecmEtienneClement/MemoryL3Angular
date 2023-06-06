@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularMateriels } from './sharedModules/materials.modules';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -13,6 +13,7 @@ import { AppReducer } from './ngrx/Entities.state';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomeRouterSerializen } from './ngrx/Router.state';
 import { ComponentsModule } from './sharedModules/componentsModule';
+import { CustomeInterceptor } from './serviceEntities/InterceptorReq';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,6 @@ import { ComponentsModule } from './sharedModules/componentsModule';
     }),
     AngularMateriels,
     ComponentsModule,
-  
   ],
   exports: [AngularMateriels, ComponentsModule],
   providers: [
@@ -35,6 +35,11 @@ import { ComponentsModule } from './sharedModules/componentsModule';
     EntitiesActions,
     EntitiesEffects,
     EntitiesSelectors,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomeInterceptor,
+      multi: true,
+    },
   ],
 })
 export class CoreModule {}

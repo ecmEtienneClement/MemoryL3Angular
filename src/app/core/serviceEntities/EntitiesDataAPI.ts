@@ -11,8 +11,10 @@ export class EntitiesDataAPI<T extends I> {
 
   //
   public signUpEntitie(entitie: T): Observable<IResponseAPI<T>> {
+     const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
-      .post<IResponseAPI<T>>(environment.hostDev + 'signUp/', entitie)
+      .post<IResponseAPI<T>>(environment.hostDev + 'signUp/'+ `?id=${id}&em=${email}`, entitie)
       .pipe(retry(1));
   }
 
@@ -33,32 +35,42 @@ export class EntitiesDataAPI<T extends I> {
  */
   //
   public addEntitie(entitie: T): Observable<IResponseAPI<T>> {
+     const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
-      .post<IResponseAPI<T>>(environment.hostDev + this.nameModel, entitie)
+      .post<IResponseAPI<T>>(environment.hostDev + this.nameModel+ `?id=${id}&em=${email}`, entitie)
       .pipe(retry(1));
   }
 
   //
   public getAllEntities(): Observable<IResponseAPI<T>> {
+    const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
-      .get<IResponseAPI<T>>(environment.hostDev + this.nameModel)
+      .get<IResponseAPI<T>>(
+        environment.hostDev  + this.nameModel+ `?id=${id}&em=${email}`
+      )
       .pipe(retry(1));
   }
 
   //
   public getEntitieById(entitie: T): Observable<IResponseAPI<T>> {
+     const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
       .get<IResponseAPI<T>>(
-        environment.hostDev + this.nameModel + '/' + entitie.id
+        environment.hostDev + this.nameModel + '/' + entitie.id+ `?id=${id}&em=${email}`
       )
       .pipe(retry(1));
   }
 
   //
   public updEntitie(entitie: T): Observable<IResponseAPI<T>> {
+     const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
       .put<IResponseAPI<T>>(
-        environment.hostDev + this.nameModel + '/' + entitie.id,
+        environment.hostDev + this.nameModel + '/' + entitie.id+ `?id=${id}&em=${email}`,
         entitie
       )
       .pipe(retry(1));
@@ -66,17 +78,21 @@ export class EntitiesDataAPI<T extends I> {
 
   //
   public delEntitie(entitie: T): Observable<IResponseAPI<T>> {
+     const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
       .delete<IResponseAPI<T>>(
-        environment.hostDev + this.nameModel + '/' + entitie.id
+        environment.hostDev + this.nameModel + '/' + entitie.id+ `?id=${id}&em=${email}`
       )
       .pipe(retry(1));
   }
 
   //
   public delAllEntities(): Observable<IResponseAPI<T>> {
+     const id = localStorage.getItem('idProfil');
+    const email = localStorage.getItem('email');
     return this.httpClient
-      .delete<IResponseAPI<T>>(environment.hostDev + this.nameModel + '/all')
+      .delete<IResponseAPI<T>>(environment.hostDev + this.nameModel + '/all'+ `?id=${id}&em=${email}`)
       .pipe(retry(1));
   }
 }
