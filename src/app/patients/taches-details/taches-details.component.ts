@@ -17,7 +17,7 @@ import { PatientsActions, PatientsSelectors } from '../ngrx/Patients.ngrx';
 })
 export class TachesDetailsComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
-  tache!:Tache ;
+  tache!: Tache;
   patients: Patient[] = [];
   patientsPerfu: Patient[] = [];
   patientsPerfuId: string[] = [];
@@ -76,7 +76,7 @@ export class TachesDetailsComponent implements OnInit, OnDestroy {
       this.store.select(this.tachesSelectors.getEntitieById()).subscribe({
         next: (data) => {
           if (data) {
-            this.tache= data
+            this.tache = data;
             //Perfusion
             data.perfusion.forEach((idPerfu) => {
               this.patients.forEach((patient) => {
@@ -132,6 +132,22 @@ export class TachesDetailsComponent implements OnInit, OnDestroy {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+  applyFilter1(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourcePrele.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourcePrele.paginator) {
+      this.dataSourcePrele.paginator.firstPage();
+    }
+  }
+  applyFilter2(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourcePrise.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourcePrise.paginator) {
+      this.dataSourcePrise.paginator.firstPage();
     }
   }
   ///

@@ -12,6 +12,12 @@
       routerLink="/{{ routesName.mPatient.patientsTaches }}">
       Retour</a
     >
+    <a
+      class="btnActModif"
+      routerLink="/{{ routesName.mPatient.patientsTaches }}"
+    >
+      Modifier</a
+    >
   </div>
   <mat-card class="example-card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
     <mat-card-content>
@@ -124,9 +130,9 @@
     <mat-label>Filtre</mat-label>
     <input
       matInput
-      (keyup)="applyFilter($event)"
+      (keyup)="applyFilter1($event)"
       placeholder="Ex. Ali"
-      #input
+      #inputa
     />
   </mat-form-field>
 
@@ -170,7 +176,7 @@
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
-          Pas de patient(s) trouvés pour cette filtre "{{ input.value }}"
+          Pas de patient(s) trouvés pour cette filtre "{{ inputa.value }}"
         </td>
       </tr>
     </table>
@@ -189,9 +195,9 @@
     <mat-label>Filtre</mat-label>
     <input
       matInput
-      (keyup)="applyFilter($event)"
+      (keyup)="applyFilter2($event)"
       placeholder="Ex. Ali"
-      #input
+      #inputb
     />
   </mat-form-field>
 
@@ -235,7 +241,7 @@
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
-          Pas de patient(s) trouvés pour cette filtre "{{ input.value }}"
+          Pas de patient(s) trouvés pour cette filtre "{{ inputb.value }}"
         </td>
       </tr>
     </table>

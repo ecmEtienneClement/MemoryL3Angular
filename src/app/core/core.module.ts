@@ -27,6 +27,7 @@ import { ComponentsModule } from './sharedModules/componentsModule';
     }),
     AngularMateriels,
     ComponentsModule,
+  
   ],
   exports: [AngularMateriels, ComponentsModule],
   providers: [

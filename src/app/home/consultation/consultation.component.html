@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <!--                    LOADER STATE                    -->
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
+  <a
+    mat-list-item
+    routerLinkActive="active"
+    routerLink="{{ routesName.mHome.home }}"
+  >
+    Retour
+  </a>
+  <!--                    TABLE  PATIENTS                    -->
+  <span class="name">Liste des Consultations</span>
+  <mat-form-field appearance="outline">
+    <mat-label>Filtre</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="..." #input />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Date Column -->
+      <ng-container class="mt-4" matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Date</b></th>
+        <td mat-cell *matCellDef="let row">
+          <p *ngIf="row.createdAt">{{ row.createdAt | date : "shortDate" }}</p>
+        </td>
+      </ng-container>
+
+      <!-- Poids Column -->
+      <ng-container matColumnDef="Poids">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Poids</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.poids }} Kg</td>
+      </ng-container>
+
+      <!-- Taille Column -->
+      <ng-container matColumnDef="Taille">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Taille</b></th>
+        <td mat-cell *matCellDef="let row">{{ row.taille }} m</td>
+      </ng-container>
+
+      <!-- Temperature Column -->
+      <ng-container matColumnDef="Temperature">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b>Temperature</b>
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.temperature }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Pas de patient(s) trouvés pour cette filtre "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
+</div>

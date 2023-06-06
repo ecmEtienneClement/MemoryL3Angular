@@ -26,6 +26,20 @@ const routes: Routes = [
         (m) => m.ConfiCliniqueModule
       ),
   },
+  {
+    path: RoutesNames.mHome.home,
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: RoutesNames.mProfil.profil,
+    loadChildren: () =>
+      import('./profil/profil.module').then((m) => m.ProfilModule),
+  },
+  {
+    path: `${RoutesNames.mLogin.login}`,
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+  },
 ];
 
 @NgModule({

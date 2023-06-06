@@ -123,6 +123,15 @@ export interface Personnel extends J {
   salaire: number;
   specialisation?: string;
   mdp: string;
+  CompteBloques?: any;
+  Personnels?: Personnel[];
+  admin?: string;
+  Payements?: Payement[];
+  Ordonnances?: Ordonnance[];
+  RendezVous?: RendezVous[];
+  DossierPatients?: DossierPatient[];
+  Consultations?: Consultation[];
+  Taches?: Tache[];
 }
 //TODO
 export interface Poste extends I {

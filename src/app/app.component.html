@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
+  <mat-sidenav  style="background-image: url('../../assets/img/blus.gif');background-size: cover;"
     #drawer
     class="sidenav"
     fixedInViewport
@@ -10,6 +10,26 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list>
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="{{ routesName.mLogin.login }}"
+        ><mat-icon>exit_to_app</mat-icon>Login</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="{{ routesName.mHome.home }}"
+        ><mat-icon>home</mat-icon>Home</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="{{
+          routesName.mProfil.profil
+        }}/4448af3f-1def-4b7f-aa88-69c9fd12d8c6"
+        ><mat-icon>person_outline</mat-icon>Profil</a
+      >
       <a
         mat-list-item
         routerLinkActive="active"

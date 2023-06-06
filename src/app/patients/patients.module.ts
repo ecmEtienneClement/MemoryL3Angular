@@ -37,6 +37,7 @@ import { TachesComponent } from './taches/taches.component';
 import { TacheModule } from './ngrx/ngrxTache/Tache.modules';
 import { TachesAddComponent } from './taches-add/taches-add.component';
 import { TachesDetailsComponent } from './taches-details/taches-details.component';
+import { TachesUpdComponent } from './taches-upd/taches-upd.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { TachesDetailsComponent } from './taches-details/taches-details.componen
     TachesComponent,
     TachesAddComponent,
     TachesDetailsComponent,
+    TachesUpdComponent,
   ],
   imports: [
     CommonModule,
