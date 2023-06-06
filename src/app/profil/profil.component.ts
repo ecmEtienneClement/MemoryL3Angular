@@ -27,6 +27,7 @@ export class ProfilComponent implements OnInit {
     private personnelsActions: PersonnelsActions
   ) {}
   ngOnInit(): void {
+  
     this.store.dispatch(this.personnelsActions.getAllEntities()());
 
     this.personnel$ = <Observable<Personnel>>(
@@ -42,4 +43,6 @@ export class ProfilComponent implements OnInit {
       next: (data) => (this.errorMessage = data),
     });
   }
+
+
 }

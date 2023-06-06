@@ -1,0 +1,218 @@
+<div class="container">
+  <h1>PERSONNEL</h1>
+  <!--                            PARTI LOADING             -->
+
+  <ng-container *ngIf="stateApp$ | async as stateApp">
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
+  <!--                    ***************************            -->
+  <form
+    [formGroup]="formPersonnel"
+    (ngSubmit)="submitForm()"
+    novalidate
+    class="form-inline"
+    role="form"
+  >
+    <mat-accordion>
+      <mat-expansion-panel
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Informations Personnels </mat-panel-title>
+          <mat-panel-description>
+            Définir les Informations personnels
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            NOM                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="DIOUF"
+                formControlName="nom"
+              />
+            </mat-form-field>
+          </div>
+          <!--                            PRENOM                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Prénom</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Malick"
+                formControlName="prenom"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            EMAIL                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="pat@example.com"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </div>
+          <!--                            ADRESS                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Adress</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Dakar/Keur Massar/U15"
+                formControlName="adresse"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            AGE                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Age</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="25"
+                formControlName="age"
+              />
+            </mat-form-field>
+          </div>
+          <!--                            SEXE                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Sexe</mat-label>
+              <mat-select formControlName="sexe">
+                <mat-option value="M">Homme</mat-option>
+                <mat-option value="F">Femme</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            TELEPHONE                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="77 777 77 77"
+                formControlName="telephone"
+              />
+            </mat-form-field>
+          </div>
+          <!--                            MDP                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Mot de passe</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="************"
+                formControlName="mdp"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!--                            ROW                           -->
+    <mat-accordion>
+      <mat-expansion-panel
+        class="mt-2"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>Profil et Horaires </mat-panel-title>
+          <mat-panel-description>
+            Définir son profil et ses jours de travail
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <!--                            ROW  PROFIL DAY WORKING                         -->
+        <div class="row g-3">
+          <!--                            PROFIL                          
+          <div class="col form-group" *ngIf="posts | async as profils">
+            <mat-form-field appearance="outline">
+              <mat-label>Profil</mat-label>
+              <mat-select formControlName="poste">
+                <mat-option
+                  *ngFor="let profil of profils"
+                  [value]="profil.id"
+                  >{{ profil.poste }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+           -->
+          <!--                            DAYS                           -->
+
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Jours</mat-label>
+              <mat-select formControlName="jour" multiple>
+                <mat-option *ngFor="let day of daysList" [value]="day">{{
+                  day
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+            <!--                            SPECIALISATION                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Specialisation</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Généraliste"
+                formControlName="specialisation"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row g-3">
+        
+          <!--                            SALAIRE                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Salaire</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="200.000"
+                formControlName="salaire"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="row g-3">
+      <div *ngIf="!formPersonnel.invalid" class="col form-group">
+        <button type="submit" class="btn btn-outline-info">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

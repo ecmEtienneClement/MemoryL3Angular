@@ -11,38 +11,42 @@
     <mat-divider></mat-divider>
     <mat-nav-list>
       <a
+        *ngIf="!isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mLogin.login }}"
         ><mat-icon>exit_to_app</mat-icon>Login</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mHome.home }}"
         ><mat-icon>home</mat-icon>Home</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
-        routerLink="{{
-          routesName.mProfil.profil
-        }}/e8aa47d5-8c90-49f3-95b6-5aa742a44d5e"
+        routerLink="{{ routesName.mProfil.profil }}/{{ idProfil }}"
         ><mat-icon>person_outline</mat-icon>Profil</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mPatient.patients }}"
         ><mat-icon>personal_injury</mat-icon>Patients</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mPatient.patientsAdd }}"
         ><mat-icon>add</mat-icon>Ajouter Patient</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mPersonnel.personnels }}"
@@ -50,6 +54,7 @@
         <mat-icon>groups</mat-icon>Personnels</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mPersonnel.personnelsAdd }}"
@@ -57,6 +62,7 @@
       >
 
       <a
+        *ngIf="isLogin"
         routerLink="{{ routesName.mPatient.patientsTaches }}"
         mat-list-item
         routerLinkActive="active"
@@ -64,6 +70,7 @@
         <mat-icon>bookmark_border</mat-icon>Tâches</a
       >
       <a
+        *ngIf="isLogin"
         routerLink="{{ routesName.mPatient.patientsTachesAdd }}"
         mat-list-item
         routerLinkActive="active"
@@ -71,10 +78,18 @@
         <mat-icon>add</mat-icon>Ajouter Tâche</a
       >
       <a
+        *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
         routerLink="{{ routesName.mConfig.config }}"
         ><mat-icon>settings</mat-icon>Configurations</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        *ngIf="isLogin"
+        (click)="logOut()"
+        ><mat-icon>exit_to_app</mat-icon>LogOut</a
       >
     </mat-nav-list>
   </mat-sidenav>

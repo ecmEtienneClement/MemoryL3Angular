@@ -3,6 +3,7 @@ export class RoutesNames {
   //Route pour le module Profil
   public static mLogin = {
     login: 'login',
+    loginAddAdmin: 'loginAddAdmin',
   };
   //Route pour le module Profil
   public static mProfil = {

@@ -1,1 +1,71 @@
-<p>login works!</p>
+<div class="container-fluid">
+  <!--                    LOADER STATE                    -->
+  <ng-container>
+    <app-loading-cmp
+      [dataState]="stateApp"
+      [notification]="notification"
+      [errorMessage]="errorMessage"
+    ></app-loading-cmp>
+  </ng-container>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">CONNEXION</h5>
+
+      <form
+        [formGroup]="formLogin"
+        (ngSubmit)="submitForm()"
+        novalidate
+        class="form-inline"
+        role="form"
+      >
+        <!--                            ROW                           -->
+        <div class="row g-3">
+          <!--                            Email                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row g-3">
+          <!--                            password                           -->
+          <div class="col form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="password"
+                formControlName="password"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row g-3">
+            <a
+              *ngIf="creatAdmin"
+              class="aa"
+              routerLink="{{ routesName.mLogin.loginAddAdmin }}"
+            >
+              créer un compte admin</a
+            >
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="row g-3">
+            <div *ngIf="!formLogin.invalid" class="col form-group">
+              <button type="submit" class="btn btn-outline-info">
+                Connecter
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
