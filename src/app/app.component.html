@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
+  <mat-sidenav  style="background-image: url('../../assets/img/blus.gif');background-size: cover;"
     #drawer
     class="sidenav"
     fixedInViewport
@@ -28,7 +28,9 @@
         *ngIf="isLogin"
         mat-list-item
         routerLinkActive="active"
+
         routerLink="{{ routesName.mProfil.profil }}/{{ idProfil }}"
+
         ><mat-icon>person_outline</mat-icon>Profil</a
       >
       <a
@@ -84,6 +86,7 @@
         routerLink="{{ routesName.mConfig.config }}"
         ><mat-icon>settings</mat-icon>Configurations</a
       >
+
       <a
         mat-list-item
         routerLinkActive="active"
@@ -92,6 +95,9 @@
         ><mat-icon>exit_to_app</mat-icon>LogOut</a
       >
     </mat-nav-list>
+
+      </mat-nav-list>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">

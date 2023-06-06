@@ -1,6 +1,7 @@
 main{
     width: 90%;
     margin: 3rem auto 0px;;
+   
 }
 .toolbar{
     height: 4rem;
@@ -42,44 +43,50 @@ img{
     height: 0%;
     
 }
-table {
-    width: 90%;
-   
+.blcTitre {
+  //  justify-content: center;
+  align-items: flex-start;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.ti{
+  letter-spacing: 3px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.blcVal {
+  justify-content: center;
+}
+.card-jours {
+  vertical-align: middle;
+}
+mat-card-title {
+  font-size: 25px;
+  letter-spacing: 2px;
+  text-decoration:underline;
+}
+.aa {
+  text-decoration: none;
+  float: right;
+}
+.btnAct {
+  text-decoration: none;
+  float: right;
+  margin-left: 20px;
+}
+.name {
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 3px;
 
-}
-tr{
-    background: #fff;
-    
-}
-td {
-   
-    border-bottom: 5px solid #ebe8e8;
-    text-align: center;
-
-}
-th{
-    padding: 12px ;
-    text-align: center;
-}
-.card-jours{
-    vertical-align: middle;
-}
-
-.name{
-    font-size: 2rem;
-    font-weight: 600;
-    font-style: italic;
-    letter-spacing: 3px;
-
-    border: 1pt solid black;
-    border-radius: 10px;
-    padding: 0px 2rem;
+  border: 1pt solid black;
+  border-radius: 10px;
+  padding: 0px 2rem;
 }
 .example-card {
-    // max-width: 400px;
-    border-radius: 1rem;
-    // box-shadow: 0px 0px 10px rgba( 34, 34, 0,5);
+  // max-width: 400px;
+  border-radius: 1rem;
+}
 
-  }
-  
   

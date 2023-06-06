@@ -16,7 +16,37 @@ th {
   float: left;
   margin-left: 20px;
 }
-.btnActModif {
+
+.blcTitre {
+  //  justify-content: center;
+  align-items: flex-start;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.ti{
+  letter-spacing: 3px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.blcVal {
+  justify-content: center;
+}
+.card-jours {
+  vertical-align: middle;
+}
+mat-card-title {
+  font-size: 25px;
+  letter-spacing: 2px;
+  text-decoration:underline;
+}
+.aa {
   text-decoration: none;
   float: right;
 }
+.btnAct {
+  text-decoration: none;
+  float: right;
+  margin-left: 20px;
+}
+
+ 

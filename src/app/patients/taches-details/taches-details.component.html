@@ -8,7 +8,8 @@
     ></app-loading-cmp>
   </ng-container>
   <div class="col-12">
-    <a class="btnAct" routerLink="/{{ routesName.mPatient.patientsTaches }}">
+    <a class="btnAct" mat-raised-button color="warn"
+      routerLink="/{{ routesName.mPatient.patientsTaches }}">
       Retour</a
     >
     <a
@@ -18,36 +19,45 @@
       Modifier</a
     >
   </div>
-
+  <mat-card class="example-card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <mat-card-content>
   <div *ngIf="tache.Personnel" class="jumbotron mt-2">
     <div class="container">
       <!-- <h1>Hello, world!</h1> -->
       <div class="row mt-2">
         <div class="ti col-8">
           <mat-icon>personal_injury</mat-icon>
+          <b class="fs-6">Infirmier(e):</b>
+       
+          
+          
           {{ tache.Personnel.prenom | uppercase }}
           {{ tache.Personnel.nom | uppercase }}
         </div>
       </div>
 
-      <div class="row mt-2">
-        <div class="col-6 blcTitre">Adresse</div>
-        <div class="col-6 blcVal">{{ tache.Personnel.adresse }}</div>
-      </div>
-
-      <div class="row mt-2">
-        <div class="col-6 blcTitre">Sexe</div>
-        <div class="col-6 blcVal">{{ tache.Personnel.sexe }}</div>
-      </div>
-
-      <div class="row mt-2">
-        <div class="col-6 blcTitre">Téléphone</div>
-        <div class="col-6 blcVal">
-          {{ tache.Personnel.telephone[0] ? tache.Personnel.telephone : "" }}
+  <mat-divider class="mt-4"></mat-divider>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Adresse</div>
+          <div class="col-6 blcVal">{{ tache.Personnel.adresse }}</div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Sexe</div>
+          <div class="col-6 blcVal">{{ tache.Personnel.sexe }}</div>
+        </div>  
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Téléphone</div>
+          <div class="col-6 blcVal">
+            {{ tache.Personnel.telephone[0] ? tache.Personnel.telephone : "" }}
+          </div>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
         </div>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
+        
+
 
   <!--                    TABLE  PATIENTS                    -->
   <h4>Patients a perfusés</h4>

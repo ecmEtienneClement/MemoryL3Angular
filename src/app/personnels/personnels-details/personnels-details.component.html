@@ -1,180 +1,98 @@
-<!-- <div class="container">
-  <div class="card" *ngIf="personnel$ | async as per">
-    <h5 class="card-header">{{ per.nom }}</h5>
-    <div class="card-body">
-      <h5 class="card-title">Nom</h5>
-      <p class="card-text">
-        {{ per.nom }}
-      </p>
-      <h5 class="card-title">Prenom</h5>
-      <p class="card-text">
-        {{ per.prenom }}
-      </p>
-      <h5 class="card-title">Adresse</h5>
-      <p class="card-text">
-        {{ per.adresse }}
-      </p>
-      <h5 class="card-title">Age</h5>
-      <p class="card-text">
-        {{ per.age }}
-      </p>
-      <h5 *ngIf="per.Poste" class="card-title">Profil</h5>
-      <p class="card-text">
-        {{ per.Poste ? per.Poste.poste : "" }}
-      </p>
-      <h5 class="card-title">Spécialisation</h5>
-      <p class="card-text">
-        {{ per.specialisation }}
-      </p>
-      <h5 class="card-title">Salaire</h5>
-      <p class="card-text">
-        {{ per.salaire }}
-      </p>
-      <h5 class="card-title">Sexe</h5>
-      <p class="card-text">
-        {{ per.sexe }}
-      </p>
-      <h5 class="card-title">Telephone</h5>
-      <p class="card-text">
-        {{ per.telephone }}
-      </p>
-      <h5 class="card-title">Jour(s) de travail</h5>
-      <p *ngFor="let jour of per.jour" class="card-text">
-        {{ jour }}
-      </p>
 
-      <a
-        routerLink="/{{ routesName.mPersonnel.personnels }}/{{
-          routesName.mPersonnel.personnelsUpd
-        }}/{{ per.id }}"
-        routerLinkActive="router-link-active"
-        class="btn btn-primary"
-        >Modifier</a
-      >
-      <a
-        routerLink="/{{ routesName.mPersonnel.personnels }}"
-        routerLinkActive="router-link-active"
-        class="btn btn-primary"
-        >Retour</a
-      >
-    </div>
-  </div>
-</div> -->
-
-<!-- New  Tables  detail personnels de santé-->
-<main class="black-border">
+<!-- New  Tables  detail patients de santé-->
+<ng-container *ngIf="personnel$ | async as per">
   <div class="toolbar">
     <div class="detail">
       <span class="name text-secondary fs-2 fm-bold fst-italic text-center"
         >Information Personnel</span
       >
     </div>
-    <div class="logo-hopital">
-      <div>
-        <i><img src="../../assets/img/md-4.gif" class="float" /></i>
-      </div>
-    </div>
   </div>
-  <div class="row mt-4">
-    <div class="col">
-      <div class="container-fluid g-0 p-2">
-        <!-- premiere info personne -->
-        <div class="row g-0">
-          <div class="col-md-2 d-flex justify-content align-item-center">
-            <img src="../../assets/img/md-1.png" />
+  <main class="black-border">
+    <mat-card class="example-card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    
+      <mat-card-content>
+        <div class="row mt-2">
+          <div class="ti col-8">
+            <mat-icon>groups</mat-icon>
+            {{ per.prenom | uppercase }}
+            {{ per.nom | uppercase }}
           </div>
-          <div class="col ps-2">
-            <div class="row mt-3">
-              <div class="col-md">
-                <table class="table table-hover mx-auto">
-                  <mat-card
-                    class="example-card shadow-lg p-3 mb-5 bg-body-tertiary rounded"
-                    *ngIf="personnel$ | async as per"
-                  >
-                    <mat-card-header>
-                      <mat-card-title
-                        >{{ per.prenom }} {{ per.nom }}</mat-card-title
-                      >
-                    </mat-card-header>
-                    <mat-card-content>
-                      <div>
-                        <i
-                          ><img src="../../assets/img/md-2.png" class="float"
-                        /></i>
-                      </div>
-                      <!-- iteration  -->
-                      <tr *ngIf="per.Poste">
-                        <th>Profil</th>
-                        <th>Specialité</th>
-                        <th>Sexe</th>
-                        <th>Age</th>
-                        <th>Salaire</th>
-                      </tr>
-                      <tr>
-                        <td>{{ per.Poste ? per.Poste.poste : "" }}</td>
-                        <td>{{ per.specialisation }}</td>
-                        <td>{{ per.sexe }}</td>
-                        <td>{{ per.age }}</td>
-                        <td>{{ per.salaire }}</td>
-                      </tr>
-                      <div class="horaire">
-                        <h6>Jour(s) de travail</h6>
-                        <i *ngFor="let jour of per.jour" class="card-jours"
-                          >{{ jour }}
-                        </i>
-                      </div>
-                      <mat-divider></mat-divider>
-                    </mat-card-content>
-                    <mat-card-actions>
-                      <div class="d-flex justtify-content">
-                        <span><b>Adresse</b> {{ per.adresse }}</span>
-                        <span class="fa fa-phone"
-                          ><b>{{ per.telephone }}</b></span
-                        >
-                      </div>
-                    </mat-card-actions>
-                    <mat-card-footer>
-                      <div class="row g-0">
-                        <div class="col-md-10 text-center"></div>
-                        <div class="col-md-2">
-                          <div></div>
-                          <div
-                            class="btn-group d-flex justify-content align-item-center"
-                            role="group"
-                          >
-                            <button
-                              type="button"
-                              class="btn btn-danger"
-                              routerLink="/{{
-                                routesName.mPersonnel.personnels
-                              }}"
-                              routerLinkActive="router-link-active"
-                            >
-                              <mat-icon>keyboard_return</mat-icon>
-                            </button>
-
-                            <button
-                              type="button"
-                              class="btn btn-primary"
-                              routerLink="/{{
-                                routesName.mPersonnel.personnels
-                              }}/{{ routesName.mPersonnel.personnelsUpd }}/{{
-                                per.id
-                              }}"
-                            >
-                              <mat-icon>edit</mat-icon>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </mat-card-footer>
-                  </mat-card>
-                </table>
-              </div>
-            </div>
+          <div class="col-4">
+            <a
+              class="aa" mat-stroked-button color="primary"
+              routerLink="/{{ routesName.mPersonnel.personnels  }}/{{
+                routesName.mPatient.patientsDossier
+              }}/{{ per.id }}"
+            >
+              Voir Dossier Personnel</a
+            >
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</main>
+        <mat-divider class="mt-4"></mat-divider>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Adresse</div>
+          <div class="col-6 blcVal">{{ per.adresse }}</div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Age</div>
+          <div class="col-6 blcVal">{{ per.age }} ans</div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Sexe</div>
+          <div class="col-6 blcVal">{{ per.sexe }}</div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Spécialisation</div>
+          <div class="col-6 blcVal">{{ per.specialisation }}</div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Salaire</div>
+          <div class="col-6 blcVal">{{ per.salaire }} F cfa</div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Profil</div>
+          <div class="col-6 blcVal">
+            {{ per.Poste ? per.Poste.poste : "" }}
+          </div>
+        </div>
+         <div class="row mt-2">
+          <div class="col-6 blcTitre">Email</div>
+          <div class="col-6 blcVal">
+            {{ per.email }}
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Jour(s) de travail</div>
+          <div class="col-6 blcVal" >
+            <span *ngFor="let jour of per.jour">{{ jour }} </span>
+            <i ></i>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 blcTitre">Téléphone</div>
+          <div class="col-6 blcVal">
+            {{ per.telephone[0] ? per.telephone : "" }}
+          </div>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
+        <div class="row">
+          <div class="col-12">
+            <a class="btnAct" routerLink="/{{routesName.mPersonnel.personnels}}" mat-button color="warn">
+              Retour</a
+            >
+            <a
+              class="btnAct" mat-button color="success"
+              routerLink="/{{  routesName.mPersonnel.personnels }}/{{
+                routesName.mPersonnel.personnelsUpd
+              }}/{{ per.id }}"
+            >
+              Modifier</a
+            >
+          </div>
+        </div>
+        <!-- <mat-divider></mat-divider> -->
+      </mat-card-content>
+    </mat-card>
+  </main>
+</ng-container>
