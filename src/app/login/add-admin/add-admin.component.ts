@@ -97,7 +97,7 @@ export class AddAdminComponent implements OnInit {
         [Validators.required, Validators.pattern('^[a-zA-Z]*$')],
       ],
       mdp: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]*$')]],
-    //  poste: [null, [Validators.required]],
+     poste: [null, [Validators.required]],
       jour: [null, [Validators.required]],
     });
   }
@@ -119,7 +119,7 @@ export class AddAdminComponent implements OnInit {
         ? formPersonnel.specialisation
         : '',
       mdp: formPersonnel.mdp,
-      profil: 'admin',
+      profil: formPersonnel.poste,
       jour: listJour,
     };
 
